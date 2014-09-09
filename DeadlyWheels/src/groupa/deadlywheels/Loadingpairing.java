@@ -1,5 +1,6 @@
 package groupa.deadlywheels;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -9,10 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 
 
-public class Loadingpairing extends Activity {
+@SuppressLint("NewApi") public class Loadingpairing extends Activity {
 
     /** Called when the user clicks on the singleplayer mode */
     public void gotogametime(View view){
@@ -24,6 +27,11 @@ public class Loadingpairing extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        //getting rib off the status bar
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        
         setContentView(R.layout.activity_loadingpairing);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
@@ -56,9 +64,6 @@ public class Loadingpairing extends Activity {
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
