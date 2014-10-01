@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 5 elements to &apos;assets&apos;&#x0A;- Original project: &apos;SDK_Example&apos;&#x0A;- Destination element: &apos;assets&apos;&#x0A;- Original elements:&#x0A;     arelGlue.js&#x0A;     metaioman.md2&#x0A;     metaioman.png&#x0A;     metaioman_target.png&#x0A;     TrackingData_MarkerlessFast.xml" description="Copy files" element1="assets/TutorialHelloWorld/Assets/arelGlue.js" element2="assets/TutorialHelloWorld/Assets/metaioman.md2" element3="assets/TutorialHelloWorld/Assets/metaioman.png" element4="assets/TutorialHelloWorld/Assets/metaioman_target.png" element5="assets/TutorialHelloWorld/Assets/TrackingData_MarkerlessFast.xml" files="5" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1410367278762" target="/DeadlyWheels/assets" units="0" version="1.0"/>
+</session>

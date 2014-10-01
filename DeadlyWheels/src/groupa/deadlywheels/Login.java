@@ -15,7 +15,7 @@ import android.view.WindowManager;
 
 @SuppressLint("NewApi") public class Login extends Activity {
 
-    /** Called when the user clicks on the singleplayer mode */
+    /** Called when the user clicks on the single player mode */
     public void gotoLoadingpairing(View view){
         // Do something in response to the touched image
         Intent intent = new Intent(this, Loadingpairing.class);
@@ -28,8 +28,6 @@ import android.view.WindowManager;
         //getting rib off the status bar
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        
-        Intent intent = getIntent();
 
         setContentView(R.layout.activity_login);
     }

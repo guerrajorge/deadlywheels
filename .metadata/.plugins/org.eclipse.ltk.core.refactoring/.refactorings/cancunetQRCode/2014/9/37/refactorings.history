@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;com.metaio&apos; to &apos;DeadlyWheels/gen&apos;&#x0A;- Original project: &apos;cancunetQRCode&apos;&#x0A;- Destination element: &apos;DeadlyWheels/gen&apos;&#x0A;- Original element: &apos;cancunetQRCode/gen/com.metaio&apos;" description="Copy package" destination="=DeadlyWheels/gen" element1="/gen&lt;com.metaio" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1410364180311" version="1.0"/>
+</session>

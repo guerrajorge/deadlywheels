@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete 15 resources" deleteContents="true" description="Delete 15 resources" element1="/AchievementSample" element10="/SelfLevel" element11="/SphereMotionTeapot" element12="/StreamingAnimation" element13="/StreamingExample" element14="/TwoPhonesOneBall" element15="/UiSample" element2="/ButtonDrive" element3="/Collisions" element4="/Locator" element5="/MacroLoader" element6="/MacroSample" element7="/MultiplayerLobby" element8="/OptionFlags" element9="/OrbBasicSample" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="15" stamp="1412176230945"/>
+</session>

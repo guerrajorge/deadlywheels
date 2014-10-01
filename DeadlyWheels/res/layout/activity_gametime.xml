@@ -8,14 +8,4 @@
     tools:context="groupa.deadlywheels.Gametime"
     tools:ignore="MergeRootFrame" >
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:contentDescription="@string/title_activity_playit"
-        android:scaleType="fitXY"
-        android:src="@drawable/hallexample" />
-
 </RelativeLayout>

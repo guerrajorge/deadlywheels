@@ -7,6 +7,10 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="21" />
+    
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <application
         android:allowBackup="true"
@@ -47,7 +51,11 @@
         <activity
             android:name=".Gametime"
             android:label="@string/title_activity_gametime" 
+            android:orientation="horizontal"
             android:screenOrientation="userLandscape">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Loadingpairing" />
         </activity>
     </application>
 
