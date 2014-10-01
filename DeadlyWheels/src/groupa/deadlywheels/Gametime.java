@@ -20,19 +20,20 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 
-public class Gametime extends ARViewActivity implements SensorEventListener
+//public class Gametime extends ARViewActivity implements SensorEventListener
+public class Gametime extends ARViewActivity
 {
 	private IGeometry modelCancunIT;
 	private MetaioSDKCallbackHandler mCallbackHandler;
 	AssetsExtracter mTask;
 	
-	private SensorManager senSensorManager;
-	private Sensor senAccelerometer;
+	//private SensorManager senSensorManager;
+	//private Sensor senAccelerometer;
 	
 	
-	private long lastUpdate = 0;
-	private float last_x, last_y, last_z;
-	private static final int SHAKE_THRESHOLD = 200;
+	//private long lastUpdate = 0;
+	//private float last_x, last_y, last_z;
+	//private static final int SHAKE_THRESHOLD = 200;
 
 	/**
 	 * This task extracts all the assets to an external or internal location
@@ -63,9 +64,11 @@ public class Gametime extends ARViewActivity implements SensorEventListener
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		
+		/*
 		senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 	    senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 	    senSensorManager.registerListener(this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
+	    */
 	    		
 	    		
 		//getting rib off the status bar
@@ -157,6 +160,7 @@ public class Gametime extends ARViewActivity implements SensorEventListener
 		}
 	}
 	
+	/*
 	protected void onPause() {
 	    super.onPause();
 	    senSensorManager.unregisterListener(this);
@@ -200,5 +204,6 @@ public class Gametime extends ARViewActivity implements SensorEventListener
 	    }
 		
 	}
+	*/
 }
 
