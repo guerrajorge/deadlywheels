@@ -27,7 +27,7 @@ public class Gametime extends ARViewActivity
 	private MetaioSDKCallbackHandler mCallbackHandler;
 	AssetsExtracter mTask;
 	
-	//private SensorManager senSensorManager;
+	private SensorManager senSensorManager;
 	//private Sensor senAccelerometer;
 	
 	

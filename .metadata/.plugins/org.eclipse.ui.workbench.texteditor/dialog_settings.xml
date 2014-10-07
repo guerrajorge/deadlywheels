@@ -2,19 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="SHAKE_THRESHOLD" key="selection"/>
+		<item value="SmcDevice" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="SmcDevice"/>
+			<item value="setImage"/>
+			<item value="setImage()"/>
 			<item value="SHAKE_THRESHOLD"/>
 			<item value="metaioSDK"/>
 			<item value="startCamera"/>
 			<item value="setActiveModel"/>
 			<item value="AssetsExtracter"/>
-			<item value="modelCancunIT"/>
-			<item value="onCre"/>
 		</list>
 		<list key="replacehistory">
 		</list>

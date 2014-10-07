@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;VideoPlayerActivity&apos;&#x0A;- Original project: &apos;VideoPlayerActivity&apos;&#x0A;- Original element: &apos;VideoPlayerActivity/src/com.sec.android.allshare.devicediscovery&apos;" description="Delete element" element1="/src&lt;com.sec.android.allshare.devicediscovery" element2="/src&lt;com.sec.android.allshare" element3="/src&lt;com.sec.android" element4="/src&lt;com.sec" elements="4" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1412200836620" subPackages="false" version="1.0"/>
+</session>
