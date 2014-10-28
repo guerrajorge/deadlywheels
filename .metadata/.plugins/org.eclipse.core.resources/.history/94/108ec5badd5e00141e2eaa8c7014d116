@@ -336,18 +336,7 @@ public class CarDroidDuinoActivity extends Activity {
 
 			// ************************************************
 			// Inserting properties IP Server
-			// first server (Jonathan's first phone) id: f02b4307b728b94c
-			if (android_id.contains("f02b4307b728b94c")) {
-				this.carDroiDuinoDbAdapter
-						.createPropertie(
-								SystemProperties.PROPERTIE_ID_IPADDRESS_SERVER,
-								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_SERVER_1,
-								" ");
-			}
-
-			// ************************************************
-			// Inserting properties IP Server
-			// first client (Jonathan's second phone) id: 2cc0cff86966c395
+			// first client (Jonathan's phone) id: 2cc0cff86966c395
 			if (android_id.contains("2cc0cff86966c395")) {
 				this.carDroiDuinoDbAdapter
 						.createPropertie(
@@ -368,25 +357,14 @@ public class CarDroidDuinoActivity extends Activity {
 			// ************************************************
 			// Inserting properties IP Client
 			// first client (Jorge's phone) id: f2113d40eb7bd59a
-			if (android_id.contains("f2113d40eb7bd59a")
-					|| android_id.contains("f02b4307b728b94c")) {
+			// first client (Jonathan's first phone) id: f02b4307b728b94c
+			if (android_id.contains("f2113d40eb7bd59a")) {
 				this.carDroiDuinoDbAdapter
 						.createPropertie(
 								SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
 								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_1,
 								" ");
 			}
-
-			// first client (Jonathan's first phone) id: f02b4307b728b94c
-			if (android_id.contains("f02b4307b728b94c")
-					|| android_id.contains("f02b4307b728b94c")) {
-				this.carDroiDuinoDbAdapter
-						.createPropertie(
-								SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
-								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_2,
-								" ");
-			}
-
 			// ************************************************
 			// Inserting properties IP Client
 			// first client (Jonathan's second phone) id: 2cc0cff86966c395

@@ -383,7 +383,7 @@ public class CarDroidDuinoActivity extends Activity {
 				this.carDroiDuinoDbAdapter
 						.createPropertie(
 								SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
-								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_2,
+								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_1,
 								" ");
 			}
 

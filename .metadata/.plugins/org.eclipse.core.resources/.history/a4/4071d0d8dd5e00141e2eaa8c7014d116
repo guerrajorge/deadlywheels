@@ -60,7 +60,7 @@ public class LoadAppDeadlyWheel extends Activity {
 	 */
 	public void gotoLogin(View view) {
 
-		if (android_id.contains("f2113d40eb7bd59a") || android_id.contains("f02b4307b728b94c")) {
+		if (android_id.contains("f2113d40eb7bd59a")) {
 			// *************************************************
 			// Creating Object to send the intent to start the Screen
 			// properties
