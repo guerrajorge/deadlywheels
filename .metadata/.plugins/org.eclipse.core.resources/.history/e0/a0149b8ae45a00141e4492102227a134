@@ -1,0 +1,5 @@
+package groupa.deadlywheels.db;
+
+public class CarDbAdapter {
+
+}
