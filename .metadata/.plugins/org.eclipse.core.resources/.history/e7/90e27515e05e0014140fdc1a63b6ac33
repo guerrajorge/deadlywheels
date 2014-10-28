@@ -100,12 +100,12 @@ public class SystemProperties {
 	public static final String PROPERTIE_DEFAUL_VAL_PORT_SERVER = "5005";
 
 	/**
-	 * Jorge's first phone ip address
+	 * Valor Default para Propriedade - Endere�o IP do Cliente
 	 */
 	public static final String PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_1 = "192.168.100.101";
 	
 	/**
-	 * Jonathan's first phone ip address
+	 * Valor Default para Propriedade - Endere�o IP do Cliente
 	 */
 	public static final String PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_2 = "192.168.100.103";
 

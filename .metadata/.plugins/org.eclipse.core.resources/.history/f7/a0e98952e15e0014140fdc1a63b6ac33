@@ -85,9 +85,14 @@ public class SystemProperties {
 	public static final int PROPERTIE_ID_PORT_SERVER = 2;
 
 	/**
-	 * ID da Propriedade - Endere�o IP do Client
+	 * ID da Propriedade - Endere�o IP do Client Jorge
 	 */
-	public static final int PROPERTIE_ID_IPADDRESS_CLIENT = 3;
+	public static final int PROPERTIE_ID_IPADDRESS_CLIENT_1 = 3;
+	
+	/**
+	 * ID da Propriedade - Endere�o IP do Client Jonathan
+	 */
+	public static final int PROPERTIE_ID_IPADDRESS_CLIENT_2 = 4;
 
 	/**
 	 * Valor Default para Propriedade - Endere�o IP do Servidor

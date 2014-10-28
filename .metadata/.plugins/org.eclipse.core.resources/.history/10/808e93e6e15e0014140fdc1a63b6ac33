@@ -299,6 +299,13 @@ public class CarDroidDuinoActivity extends Activity {
 	private void verifyBasicProperties() {
 
 		// ************************************************
+		// Android device id
+		// first server (Jorge's phone) id: f2113d40eb7bd59a
+		// first client (Jonathan's phone) id: 2cc0cff86966c395
+		// String android_id = Secure.getString(this.getContentResolver(),
+		// Secure.ANDROID_ID);
+
+		// ************************************************
 		// Viewing of the properties
 		Cursor cursor = this.carDroiDuinoDbAdapter
 				.fetchPropertie(SystemProperties.PROPERTIE_ID_IPADDRESS_SERVER);
@@ -308,22 +315,36 @@ public class CarDroidDuinoActivity extends Activity {
 		if (cursor.getCount() == 0) {
 			// ************************************************
 			// Inserting properties IP Server
-			this.carDroiDuinoDbAdapter.createPropertie(
-					SystemProperties.PROPERTIE_ID_IPADDRESS_SERVER,
-					SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_SERVER_1,
-					" ");
+			// first server (Jorge's phone) id: f2113d40eb7bd59a
+			if (android_id.contains("f2113d40eb7bd59a")) {
+				this.carDroiDuinoDbAdapter
+						.createPropertie(
+								SystemProperties.PROPERTIE_ID_IPADDRESS_SERVER,
+								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_SERVER_1,
+								" ");
+			}
 
 			// ************************************************
 			// Inserting properties IP Server
-			this.carDroiDuinoDbAdapter.createPropertie(
-					SystemProperties.PROPERTIE_ID_IPADDRESS_SERVER,
-					SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_SERVER_1,
-					" ");
+			// first server (Jonathan's first phone) id: f02b4307b728b94c
+			if (android_id.contains("f02b4307b728b94c")) {
+				this.carDroiDuinoDbAdapter
+						.createPropertie(
+								SystemProperties.PROPERTIE_ID_IPADDRESS_SERVER,
+								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_SERVER_1,
+								" ");
+			}
 
-			this.carDroiDuinoDbAdapter.createPropertie(
-					SystemProperties.PROPERTIE_ID_IPADDRESS_SERVER,
-					SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_SERVER_1,
-					" ");
+			// ************************************************
+			// Inserting properties IP Server
+			// first client (Jonathan's second phone) id: 2cc0cff86966c395
+			if (android_id.contains("2cc0cff86966c395")) {
+				this.carDroiDuinoDbAdapter
+						.createPropertie(
+								SystemProperties.PROPERTIE_ID_IPADDRESS_SERVER,
+								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_SERVER_1,
+								" ");
+			}
 
 			// ************************************************
 			// Inserting prop Server Port
@@ -331,15 +352,32 @@ public class CarDroidDuinoActivity extends Activity {
 					SystemProperties.PROPERTIE_ID_PORT_SERVER,
 					SystemProperties.PROPERTIE_DEFAUL_VAL_PORT_SERVER, " ");
 
-			this.carDroiDuinoDbAdapter.createPropertie(
-					SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
-					SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_1,
-					" ");
+			// ************************************************
+			// Inserting property values IP Client
 
-			this.carDroiDuinoDbAdapter.createPropertie(
-					SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
-					SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_1,
-					" ");
+			// ************************************************
+			// Inserting properties IP Client
+			// first client (Jorge's phone) id: f2113d40eb7bd59a
+			if (android_id.contains("f2113d40eb7bd59a")
+					|| android_id.contains("f02b4307b728b94c")) {
+				this.carDroiDuinoDbAdapter
+						.createPropertie(
+								SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
+								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_1,
+								" ");
+			}
+				this.carDroiDuinoDbAdapter
+						.createPropertie(
+								SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
+								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_2,
+								" ");
+			
+
+				this.carDroiDuinoDbAdapter
+						.createPropertie(
+								SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
+								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_1,
+								" ");
 
 			// ************************************************
 			// Inserting prop Port Client
@@ -350,56 +388,92 @@ public class CarDroidDuinoActivity extends Activity {
 	}
 }
 
-/*
- * Deadcode
- * 
- * // ************************************************ // Inserting properties
- * IP Server // first server (Jorge's phone) id: f2113d40eb7bd59a if
- * (android_id.contains("f2113d40eb7bd59a")) { this.carDroiDuinoDbAdapter
- * .createPropertie( SystemProperties.PROPERTIE_ID_IPADDRESS_SERVER,
- * SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_SERVER_1, " "); }
- * 
- * // ************************************************ // Inserting properties
- * IP Server // first server (Jonathan's first phone) id: f02b4307b728b94c if
- * (android_id.contains("f02b4307b728b94c")) { this.carDroiDuinoDbAdapter
- * .createPropertie( SystemProperties.PROPERTIE_ID_IPADDRESS_SERVER,
- * SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_SERVER_1, " "); }
- * 
- * // ************************************************ // Inserting properties
- * IP Server // first client (Jonathan's second phone) id: 2cc0cff86966c395 if
- * (android_id.contains("2cc0cff86966c395")) { this.carDroiDuinoDbAdapter
- * .createPropertie( SystemProperties.PROPERTIE_ID_IPADDRESS_SERVER,
- * SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_SERVER_1, " "); }
- * 
- * // ************************************************ // Inserting prop Server
- * Port this.carDroiDuinoDbAdapter.createPropertie(
- * SystemProperties.PROPERTIE_ID_PORT_SERVER,
- * SystemProperties.PROPERTIE_DEFAUL_VAL_PORT_SERVER, " ");
- * 
- * // ************************************************ // Inserting property
- * values IP Client
- * 
- * // ************************************************ // Inserting properties
- * IP Client // first client (Jorge's phone) id: f2113d40eb7bd59a if
- * (android_id.contains("f2113d40eb7bd59a") ||
- * android_id.contains("f02b4307b728b94c")) { this.carDroiDuinoDbAdapter
- * .createPropertie( SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
- * SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_1, " "); }
- * 
- * // first client (Jonathan's first phone) id: f02b4307b728b94c if
- * (android_id.contains("f02b4307b728b94c") ||
- * android_id.contains("f02b4307b728b94c")) { this.carDroiDuinoDbAdapter
- * .createPropertie( SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
- * SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_2, " "); }
- * 
- * // ************************************************ // Inserting properties
- * IP Client // first client (Jonathan's second phone) id: 2cc0cff86966c395 if
- * (android_id.contains("2cc0cff86966c395")) { this.carDroiDuinoDbAdapter
- * .createPropertie( SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
- * SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_1, " "); }
- * 
- * // ************************************************ // Inserting prop Port
- * Client this.carDroiDuinoDbAdapter.createPropertie(
- * SystemProperties.PROPERTIE_ID_PORT_CLIENT,
- * SystemProperties.PROPERTIE_DEFAUL_VAL_PORT_CLIENT, " ");
- */
+
+
+
+
+
+
+/*Deadcode
+
+// ************************************************
+			// Inserting properties IP Server
+			// first server (Jorge's phone) id: f2113d40eb7bd59a
+			if (android_id.contains("f2113d40eb7bd59a")) {
+				this.carDroiDuinoDbAdapter
+						.createPropertie(
+								SystemProperties.PROPERTIE_ID_IPADDRESS_SERVER,
+								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_SERVER_1,
+								" ");
+			}
+
+			// ************************************************
+			// Inserting properties IP Server
+			// first server (Jonathan's first phone) id: f02b4307b728b94c
+			if (android_id.contains("f02b4307b728b94c")) {
+				this.carDroiDuinoDbAdapter
+						.createPropertie(
+								SystemProperties.PROPERTIE_ID_IPADDRESS_SERVER,
+								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_SERVER_1,
+								" ");
+			}
+
+			// ************************************************
+			// Inserting properties IP Server
+			// first client (Jonathan's second phone) id: 2cc0cff86966c395
+			if (android_id.contains("2cc0cff86966c395")) {
+				this.carDroiDuinoDbAdapter
+						.createPropertie(
+								SystemProperties.PROPERTIE_ID_IPADDRESS_SERVER,
+								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_SERVER_1,
+								" ");
+			}
+
+			// ************************************************
+			// Inserting prop Server Port
+			this.carDroiDuinoDbAdapter.createPropertie(
+					SystemProperties.PROPERTIE_ID_PORT_SERVER,
+					SystemProperties.PROPERTIE_DEFAUL_VAL_PORT_SERVER, " ");
+
+			// ************************************************
+			// Inserting property values IP Client
+
+			// ************************************************
+			// Inserting properties IP Client
+			// first client (Jorge's phone) id: f2113d40eb7bd59a
+			if (android_id.contains("f2113d40eb7bd59a")
+					|| android_id.contains("f02b4307b728b94c")) {
+				this.carDroiDuinoDbAdapter
+						.createPropertie(
+								SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
+								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_1,
+								" ");
+			}
+
+			// first client (Jonathan's first phone) id: f02b4307b728b94c
+			if (android_id.contains("f02b4307b728b94c")
+					|| android_id.contains("f02b4307b728b94c")) {
+				this.carDroiDuinoDbAdapter
+						.createPropertie(
+								SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
+								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_2,
+								" ");
+			}
+
+			// ************************************************
+			// Inserting properties IP Client
+			// first client (Jonathan's second phone) id: 2cc0cff86966c395
+			if (android_id.contains("2cc0cff86966c395")) {
+				this.carDroiDuinoDbAdapter
+						.createPropertie(
+								SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
+								SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_1,
+								" ");
+			}
+
+			// ************************************************
+			// Inserting prop Port Client
+			this.carDroiDuinoDbAdapter.createPropertie(
+					SystemProperties.PROPERTIE_ID_PORT_CLIENT,
+					SystemProperties.PROPERTIE_DEFAUL_VAL_PORT_CLIENT, " ");
+*/

@@ -335,6 +335,10 @@ public class CarDroidDuinoActivity extends Activity {
 					SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
 					SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_1,
 					" ");
+			this.carDroiDuinoDbAdapter.createPropertie(
+					SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
+					SystemProperties.PROPERTIE_DEFAUL_VAL_IPADDRESS_CLIENT_2,
+					" ");
 
 			this.carDroiDuinoDbAdapter.createPropertie(
 					SystemProperties.PROPERTIE_ID_IPADDRESS_CLIENT,
