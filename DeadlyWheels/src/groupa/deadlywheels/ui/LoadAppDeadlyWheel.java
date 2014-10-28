@@ -4,6 +4,8 @@ import groupa.deadlywheels.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings.Secure;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,9 +21,22 @@ import android.view.WindowManager;
  */
 public class LoadAppDeadlyWheel extends Activity {
 
+	// ************************************************
+	// Android device id
+	String android_id = "";
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+
+		// ************************************************
+		// Android device id
+		// first server (Jorge's phone) id: f2113d40eb7bd59a
+		// first client (Jonathan's phone) id: 2cc0cff86966c395
+		android_id = Secure.getString(this.getContentResolver(),
+				Secure.ANDROID_ID);
+
+		Log.d("android id read by cell", android_id);
 
 		// *************************************************
 		// Performs first principal inherited class (Upper class - Extends )
@@ -44,12 +59,26 @@ public class LoadAppDeadlyWheel extends Activity {
 	 * called after a certain time interval
 	 */
 	public void gotoLogin(View view) {
-		// *************************************************
-		// Creating Object to send the intent to start the Screen
-		// properties
-		Intent i = new Intent(this, Login.class);
-		// *************************************************
-		// Sending the Operating System the intent to start Activity
-		startActivity(i);
+
+		if (android_id.contains("f2113d40eb7bd59a")) {
+			// *************************************************
+			// Creating Object to send the intent to start the Screen
+			// properties
+			Intent intent = new Intent(this, Login.class);
+			intent.putExtra("EXTRA_ANDROID_ID", android_id);
+			// *************************************************
+			// Sending the Operating System the intent to start Activity
+			startActivity(intent);
+		}
+
+		else if (android_id.contains("2cc0cff86966c395")) {
+			// *************************************************
+			// Creating Object to send the intent right to the video
+			// screen
+			Intent intent = new Intent(this, CarDroidDuinoActivity.class);
+			intent.putExtra("EXTRA_ANDROID_ID", android_id);
+			startActivity(intent);
+
+		}
 	}
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, CarDroidDuinoActivity!</string>
-    <string name="app_name">CarDroiDuino</string>
+    <string name="app_name">DeadlyWheels</string>
     <string name="btn_control">CONTROLE</string>
     <string name="btn_car">CARRO</string>
     <string name="title_paired_devices">Dispositivos Pareados</string>

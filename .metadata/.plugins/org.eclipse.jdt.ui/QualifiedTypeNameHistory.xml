@@ -10,7 +10,6 @@
 <fullyQualifiedTypeName name="android.hardware.SensorManager"/>
 <fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="android.provider.Settings.Secure"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="android.text.format.DateFormat"/>
 <fullyQualifiedTypeName name="android.graphics.Bitmap"/>
 <fullyQualifiedTypeName name="com.metaio.cloud.plugin.util.MetaioCloudUtils"/>
@@ -29,8 +28,6 @@
 <fullyQualifiedTypeName name="groupa.deadlywheels.db.CarDbAdapter"/>
 <fullyQualifiedTypeName name="groupa.deadlywheels.Loadingpairing"/>
 <fullyQualifiedTypeName name="br.usjt.aepn2012.cardroiduino.ui.CarDroidDuinoActivity"/>
-<fullyQualifiedTypeName name="android.view.Window"/>
-<fullyQualifiedTypeName name="android.view.WindowManager"/>
 <fullyQualifiedTypeName name="br.usjt.aepn2012.cardroiduino.R"/>
 <fullyQualifiedTypeName name="android.support.v7.app.ActionBarActivity"/>
 <fullyQualifiedTypeName name="android.R"/>
@@ -38,4 +35,7 @@
 <fullyQualifiedTypeName name="groupa.deadlywheels.R"/>
 <fullyQualifiedTypeName name="groupa.deadlywheels.core.CarDroiDuinoCore"/>
 <fullyQualifiedTypeName name="groupa.deadlywheels.utils.SystemProperties"/>
+<fullyQualifiedTypeName name="android.view.Window"/>
+<fullyQualifiedTypeName name="android.view.WindowManager"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
 </qualifiedTypeNameHistroy>

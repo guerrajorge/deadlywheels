@@ -9,15 +9,17 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.Settings.Secure;
+import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 
 /**
  * <p>
  * <b>Description:</b> <br>
  * <p>
- * Home screen of DeadlyWheel System - 
- * Start Menu to Choose the Purpose Device :
+ * Home screen of DeadlyWheel System - Start Menu to Choose the Purpose Device :
  * Car Remote Control Server or remote control
  * </p>
  * 
@@ -45,6 +47,10 @@ public class CarDroidDuinoActivity extends Activity {
 	 */
 	private String modemBluetoothMACAddress;
 
+	// ************************************************
+	// Android device id
+	String android_id = "";
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,13 @@ public class CarDroidDuinoActivity extends Activity {
 		// *************************************************
 		// Performs first principal inherited class (Upper class - Extends )
 		super.onCreate(savedInstanceState);
+
+		// *************************************************
+		// Makes the screen properties: fullscreen getting rib of the
+		// status bar
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		// *************************************************
 		// Which by setting the Layout ( XML ) Activity associated with this - >
@@ -67,9 +80,19 @@ public class CarDroidDuinoActivity extends Activity {
 		// Checking if properties were created
 		this.verifyBasicProperties();
 
+		Bundle extras = getIntent().getExtras();
+
+		if (extras != null) {
+			android_id = extras.getString("EXTRA_ANDROID_ID");
+		}
+
+		Log.d("android id received by the intent", android_id);
+
 		/*
 		 * Button Opening Screen to perform in Car
 		 */
+		// if (android_id.contains("f2113d40eb7bd59a")) {
+
 		ImageButton btnOpenCarServer = (ImageButton) findViewById(R.id.btnCarro);
 		btnOpenCarServer.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -77,16 +100,23 @@ public class CarDroidDuinoActivity extends Activity {
 			}
 		});
 
+		// openCarServerActivity();
+		// }
+
 		/*
 		 * Button to Opening Screen Remote Control Cart
 		 */
+		// if (android_id.contains("2cc0cff86966c395")) {
+
 		ImageButton btnOpenCarControl = (ImageButton) findViewById(R.id.btnControle);
 		btnOpenCarControl.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				// openCarControlActivy();
+			public void onClick(View v) { // openCarControlActivy();
 				startCarControlActivity();
 			}
 		});
+
+		// startCarControlActivity();
+		// }
 
 		/*
 		 * Button to Opening Screen System Properties
@@ -283,8 +313,8 @@ public class CarDroidDuinoActivity extends Activity {
 		// Android device id
 		// first server (Jorge's phone) id: f2113d40eb7bd59a
 		// first client (Jonathan's phone) id: 2cc0cff86966c395
-		String android_id = Secure.getString(this.getContentResolver(),
-				Secure.ANDROID_ID);
+		// String android_id = Secure.getString(this.getContentResolver(),
+		// Secure.ANDROID_ID);
 
 		// ************************************************
 		// Viewing of the properties
