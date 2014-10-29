@@ -60,7 +60,8 @@ public class LoadAppDeadlyWheel extends Activity {
 	 */
 	public void gotoLogin(View view) {
 
-		if (android_id.contains("f2113d40eb7bd59a") || android_id.contains("f02b4307b728b94c")) {
+		if (android_id.contains("f2113d40eb7bd59a")
+				|| android_id.contains("f02b4307b728b94c")) {
 			// *************************************************
 			// Creating Object to send the intent to start the Screen
 			// properties
@@ -71,7 +72,8 @@ public class LoadAppDeadlyWheel extends Activity {
 			startActivity(intent);
 		}
 
-		else if (android_id.contains("2cc0cff86966c395")) {
+		else if (android_id.contains("2cc0cff86966c395")
+				|| android_id.contains("a5fb5698b3bd699c")) {
 			// *************************************************
 			// Creating Object to send the intent right to the video
 			// screen

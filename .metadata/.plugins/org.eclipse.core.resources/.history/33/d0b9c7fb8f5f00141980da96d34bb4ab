@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <ImageButton
+            android:id="@+id/btnFrente"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/btnFrente"
+            android:src="@drawable/ic_arrow_right" />
+
+        <ImageButton
+            android:id="@+id/btnRe"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/btnRe"
+            android:src="@drawable/ic_arrow_left" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+
+        <groupa.deadlywheels.ui.FrameView android:id="@+id/surfaceControl" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/btnMarchaAumenta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/btnMarchaAumenta"
+                android:src="@drawable/arrow_marcha_aumenta" />
+
+            <EditText
+                android:id="@+id/txtMarcha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:gravity="center"
+                android:hint="@+id/hint" >
+
+                <requestFocus />
+            </EditText>
+
+            <ImageButton
+                android:id="@+id/btnMarchaReduz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/btnMarchaReduz"
+                android:src="@drawable/arrow_marcha_reduz" />
+
+            <ToggleButton
+                android:id="@+id/btnFreeNavigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textOff="FN-Off"
+                android:textOn="FN-On" />
+
+            <ImageButton
+                android:id="@+id/btnFarol"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/btnFarol"
+                android:src="@drawable/ic_flashlight" />
+        </LinearLayout>
+
+        <RelativeLayoutandroid:layout_width>
+        </RelativeLayoutandroid:layout_width>
+    </RelativeLayout>
+
+</LinearLayout>

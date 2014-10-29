@@ -2,57 +2,75 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" 
-    android:keepScreenOn="true">
-	
-    <LinearLayout android:orientation="vertical"
-		android:layout_width="wrap_content"
-		android:layout_height="match_parent">
+    android:baselineAligned="false"
+    android:keepScreenOn="true"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
         <ImageButton
             android:id="@+id/btnFrente"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_arrow_right" 
+            android:layout_weight="1"
             android:contentDescription="@string/btnFrente"
-            android:layout_weight="1"/>
+            android:src="@drawable/ic_arrow_right" />
 
         <ImageButton
             android:id="@+id/btnRe"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_arrow_left"
+            android:layout_weight="1"
             android:contentDescription="@string/btnRe"
-            android:layout_weight="1" />
-        
-	</LinearLayout>
-    
-    <groupa.deadlywheels.ui.FrameView
-		android:id="@+id/surfaceControl"
-		android:layout_width="0dp"
-		android:layout_height="fill_parent" 
-		android:layout_weight="1" />
-    
-    <LinearLayout android:orientation="vertical"
-		android:layout_width="wrap_content"
-		android:layout_height="match_parent">
+            android:src="@drawable/ic_arrow_left" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+
+        <groupa.deadlywheels.ui.FrameView
+            android:id="@+id/surfaceControl"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <ImageView
+            android:id="@+id/crackview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/crack"
+            android:onClick="gotoLogin"
+            android:scaleType="fitXY"
+            android:src="@raw/crack" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
         <ImageButton
             android:id="@+id/btnMarchaAumenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/arrow_marcha_aumenta" 
-            android:contentDescription="@string/btnMarchaAumenta"/>
+            android:contentDescription="@string/btnMarchaAumenta"
+            android:src="@drawable/arrow_marcha_aumenta" />
 
         <EditText
             android:id="@+id/txtMarcha"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
-            android:hint="@+id/hint"
-            android:focusable="false"
+            android:layout_height="wrap_content"
             android:clickable="false"
-            android:gravity="center">
-			
+            android:focusable="false"
+            android:gravity="center"
+            android:hint="@+id/hint" >
+
             <requestFocus />
         </EditText>
 
@@ -60,23 +78,22 @@
             android:id="@+id/btnMarchaReduz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/arrow_marcha_reduz" 
-            android:contentDescription="@string/btnMarchaReduz"/>
-        
+            android:contentDescription="@string/btnMarchaReduz"
+            android:src="@drawable/arrow_marcha_reduz" />
+
         <ToggleButton
             android:id="@+id/btnFreeNavigation"
             android:layout_width="match_parent"
-			android:layout_height="wrap_content" 
-			android:textOff="FN-Off" 
-			android:textOn="FN-On" />
-        
+            android:layout_height="wrap_content"
+            android:textOff="FN-Off"
+            android:textOn="FN-On" />
+
         <ImageButton
             android:id="@+id/btnFarol"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_flashlight"
-            android:contentDescription="@string/btnFarol" />
-        
-			
-	</LinearLayout>
+            android:contentDescription="@string/btnFarol"
+            android:src="@drawable/ic_flashlight" />
+    </LinearLayout>
+
 </LinearLayout>
