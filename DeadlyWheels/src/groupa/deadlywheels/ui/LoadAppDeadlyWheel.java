@@ -42,7 +42,7 @@ public class LoadAppDeadlyWheel extends Activity {
 		// Performs first principal inherited class (Upper class - Extends )
 		super.onCreate(savedInstanceState);
 
-		// getting rib off the status bar
+		// getting rib of the status bar
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);

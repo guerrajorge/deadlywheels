@@ -36,14 +36,37 @@
         <groupa.deadlywheels.ui.FrameView
             android:id="@+id/surfaceControl"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
+            android:layout_height="fill_parent"
+            android:onClick="cracksound" />
+        
+        <TextView
+            android:id="@+id/TotalScoreLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/TotalScore"
+            android:textColor="#FFAA66CC"
+            android:textSize="30sp" />
+        <TextView
+            android:id="@+id/HitsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/TotalScoreLabel"
+            android:layout_below="@+id/TotalScoreLabel"
+            android:text="@string/Hits"
+            android:textColor="#FFAA66CC"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/crackview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
             android:contentDescription="@string/crack"
             android:onClick="gotoLogin"
             android:scaleType="fitXY"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="hello">Hello World, CarDroidDuinoActivity!</string>
     <string name="app_name">DeadlyWheels</string>
     <string name="btn_control">CONTROLE</string>
@@ -29,4 +30,8 @@
     <string name="btnFarol">btnFarol</string>
     <string name="hint">0</string>
     <string name="crack">Screen crack!</string>
+    <string name="Hits">Hits</string>
+    <string name="TotalScore">Total Scores</string>
+    
+
 </resources>

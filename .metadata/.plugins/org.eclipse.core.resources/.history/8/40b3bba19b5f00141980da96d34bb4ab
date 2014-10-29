@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, CarDroidDuinoActivity!</string>
+    <string name="app_name">DeadlyWheels</string>
+    <string name="btn_control">CONTROLE</string>
+    <string name="btn_car">CARRO</string>
+    <string name="title_paired_devices">Dispositivos Pareados</string>
+    <string name="title_other_devices">Outros Dispositivos</string>
+    <string name="btn_scan">Procurar Dispositivos</string>
+    <string name="none_paired">Sem Dispositivos pareados</string>
+    <string name="select_device">Selecione um Dispositivo</string>
+    <string name="none_found">Nenhum dispositivo encontrado</string>
+    <string name="scanning">Verificando</string>
+    <string name="textConfigServer">Configurações do Servidor do Carrinho</string>
+    <string name="textConfigClient">Configurações do Controle</string>
+    <string name="textIPAddress">Endereço IP:</string>
+    <string name="textPort">Porta:</string>
+    <string name="btnSalvar">Salvar</string>
+    <string name="descAppInitialization">Initialization of the DeadlyWheel App</string>
+    <string name="btnCarro">Takes the user to CarServerActivity</string>
+    <string name="btnControle">Take the user to CarControlActivity</string>
+    <string name="brnPropriedades">Take the user to SystemProperties</string>
+    <string name="singlemode">Singleplayer</string>
+    <string name="multimode">Multiplayer</string>
+    <string name="btnFrente">Front button</string>
+    <string name="btnRe">btnRe</string>
+    <string name="btnMarchaAumenta">btnMarchaAumenta</string>
+    <string name="btnMarchaReduz">btnMarchaReduz</string>
+    <string name="btnFarol">btnFarol</string>
+    <string name="hint">0</string>
+    <string name="crack">Screen crack!</string>
+</resources>
