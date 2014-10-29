@@ -6,20 +6,20 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="groupa.deadlywheels" key="selection"/>
+		<item value="setOnTouchListener" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="setOnTouchListener"/>
+			<item value="onTouch"/>
+			<item value="surface"/>
 			<item value="br.usjt.aepn2012.cardroiduino"/>
 			<item value="surfaceControl"/>
 			<item value="com"/>
 			<item value="carControlActivity"/>
 			<item value="carControl"/>
-			<item value="openCarServerActivity"/>
-			<item value="goto"/>
-			<item value="CarDroiDuinoDbAdapter"/>
 		</list>
 		<list key="replacehistory">
 			<item value="groupa.deadlywheels"/>
