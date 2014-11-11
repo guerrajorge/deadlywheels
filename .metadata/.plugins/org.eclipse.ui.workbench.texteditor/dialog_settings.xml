@@ -6,20 +6,20 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="go" key="selection"/>
+		<item value="on" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="Onresume"/>
+			<item value="On"/>
+			<item value="OnRe"/>
+			<item value="onSensorChanged"/>
 			<item value="go"/>
 			<item value="three"/>
 			<item value="crack"/>
 			<item value="start_counter"/>
-			<item value="setup"/>
-			<item value="setOnTouchListener"/>
-			<item value="onTouch"/>
-			<item value="surface"/>
 		</list>
 		<list key="replacehistory">
 			<item value="groupa.deadlywheels"/>

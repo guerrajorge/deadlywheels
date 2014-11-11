@@ -10,9 +10,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,6 +26,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 @SuppressLint("ClickableViewAccessibility")
 public class CarControlActivity extends Activity implements SensorEventListener {
@@ -38,6 +41,16 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 	private CarDroiDuinoCore systemCore;
 
 	private DatagramSocketClientGate socketClientGate;
+
+	private float mLastX, mLastY, mLastZ;
+
+	private boolean mInitialized;
+
+	private SensorManager mSensorManager;
+
+	private Sensor mAccelerometer;
+
+	private final float NOISE = (float) 1.0;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -163,6 +176,17 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		 * } });
 		 */
 
+		start_counter();
+
+		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+		mAccelerometer = mSensorManager
+				.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		mSensorManager.registerListener(this, mAccelerometer,
+				SensorManager.SENSOR_DELAY_NORMAL);
+
+	}
+
+	private void start_counter() {
 		final Handler handler = new Handler();
 
 		handler.postDelayed(new Runnable() {
@@ -210,6 +234,15 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			}
 		}, 9000);
 
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				int interval = 8;
+				// Do something after 5s = 5000ms
+				start_countdown(interval);
+			}
+		}, 9000);
+
 	}
 
 	private void start_countdown(int interval) {
@@ -252,6 +285,13 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			NumberTwo.setVisibility(View.INVISIBLE);
 			NumberThree.setVisibility(View.INVISIBLE);
 			NumberGO.setVisibility(View.VISIBLE);
+		}
+
+		else if (interval == 7) {
+			NumberOne.setVisibility(View.INVISIBLE);
+			NumberTwo.setVisibility(View.INVISIBLE);
+			NumberThree.setVisibility(View.INVISIBLE);
+			NumberGO.setVisibility(View.INVISIBLE);
 		}
 	}
 
@@ -308,7 +348,41 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 	}
 
+	@SuppressLint("FloatMath")
 	public void onSensorChanged(SensorEvent event) {
+
+		TextView xAxisValue = (TextView) findViewById(R.id.xAxisValue);
+		TextView yAxisValue = (TextView) findViewById(R.id.yAxisValue);
+		TextView zAxisValue = (TextView) findViewById(R.id.zAxisValue);
+
+		float x = event.values[0];
+		float y = event.values[1];
+		float z = event.values[2];
+		if (!mInitialized) {
+			mLastX = x;
+			mLastY = y;
+			mLastZ = z;
+			mInitialized = true;
+		} else {
+			float deltaX = Math.abs(mLastX - x);
+			float deltaY = Math.abs(mLastY - y);
+			float deltaZ = Math.abs(mLastZ - z);
+			if (deltaX < NOISE)
+				deltaX = (float) 0.0;
+			if (deltaY < NOISE)
+				deltaY = (float) 0.0;
+			if (deltaZ < NOISE)
+				deltaZ = (float) 0.0;
+			
+			mLastX = x;
+			mLastY = y;
+			mLastZ = z;
+			
+			xAxisValue.setText(Float.toString(deltaX));
+			yAxisValue.setText(Float.toString(deltaY));
+			zAxisValue.setText(Float.toString(deltaZ));
+
+		}
 	}
 
 }

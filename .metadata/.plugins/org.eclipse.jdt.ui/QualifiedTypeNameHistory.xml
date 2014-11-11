@@ -4,7 +4,6 @@
 <fullyQualifiedTypeName name="com.metaio.sdk.MetaioDebug"/>
 <fullyQualifiedTypeName name="com.metaio.sdk.ARViewActivity"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
-<fullyQualifiedTypeName name="android.util.FloatMath"/>
 <fullyQualifiedTypeName name="android.hardware.Sensor"/>
 <fullyQualifiedTypeName name="android.hardware.SensorEvent"/>
 <fullyQualifiedTypeName name="android.hardware.SensorManager"/>
@@ -47,4 +46,6 @@
 <fullyQualifiedTypeName name="java.util.Calendar"/>
 <fullyQualifiedTypeName name="android.view.View"/>
 <fullyQualifiedTypeName name="android.os.Handler"/>
+<fullyQualifiedTypeName name="android.util.FloatMath"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>
