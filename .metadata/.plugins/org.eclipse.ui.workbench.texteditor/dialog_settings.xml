@@ -6,20 +6,20 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="zAxisValue" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="onResum"/>
+			<item value="on"/>
+			<item value="TAG"/>
+			<item value="getMusicVolume"/>
+			<item value="volumeString"/>
 			<item value="zAxisValue"/>
 			<item value="xAxisValue"/>
 			<item value="Onresume"/>
-			<item value="On"/>
-			<item value="OnRe"/>
-			<item value="onSensorChanged"/>
-			<item value="go"/>
-			<item value="three"/>
 		</list>
 		<list key="replacehistory">
 			<item value="groupa.deadlywheels"/>

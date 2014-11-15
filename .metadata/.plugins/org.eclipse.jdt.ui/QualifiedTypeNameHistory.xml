@@ -7,7 +7,6 @@
 <fullyQualifiedTypeName name="android.hardware.Sensor"/>
 <fullyQualifiedTypeName name="android.hardware.SensorEvent"/>
 <fullyQualifiedTypeName name="android.hardware.SensorManager"/>
-<fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="android.provider.Settings.Secure"/>
 <fullyQualifiedTypeName name="android.text.format.DateFormat"/>
 <fullyQualifiedTypeName name="android.graphics.Bitmap"/>
@@ -31,13 +30,10 @@
 <fullyQualifiedTypeName name="android.support.v7.app.ActionBarActivity"/>
 <fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="groupa.deadlywheels.carcontrol.DatagramSocketClientGate"/>
-<fullyQualifiedTypeName name="groupa.deadlywheels.R"/>
 <fullyQualifiedTypeName name="groupa.deadlywheels.core.CarDroiDuinoCore"/>
 <fullyQualifiedTypeName name="groupa.deadlywheels.utils.SystemProperties"/>
 <fullyQualifiedTypeName name="android.view.Window"/>
 <fullyQualifiedTypeName name="android.view.WindowManager"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
-<fullyQualifiedTypeName name="android.media.MediaPlayer"/>
 <fullyQualifiedTypeName name="android.widget.ImageView"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="java.util.Timer"/>
@@ -48,4 +44,14 @@
 <fullyQualifiedTypeName name="android.os.Handler"/>
 <fullyQualifiedTypeName name="android.util.FloatMath"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="android.content.ServiceConnection"/>
+<fullyQualifiedTypeName name="groupa.deadlywheels.utils.MusicService"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="android.preference.PreferenceManager"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="groupa.deadlywheels.R"/>
+<fullyQualifiedTypeName name="android.media.MediaPlayer"/>
+<fullyQualifiedTypeName name="groupa.deadlywheels.R.raw"/>
 </qualifiedTypeNameHistroy>

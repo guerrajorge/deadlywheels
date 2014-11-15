@@ -1,4 +1,5 @@
 package groupa.deadlywheels.ui;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,9 +11,11 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.Enumeration;
 import org.apache.http.conn.util.InetAddressUtils;
+
 import groupa.deadlywheels.R;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings.Secure;
@@ -22,28 +25,36 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-
 public class LoadAppDeadlyWheel extends Activity {
-	
-TextView textView1;
-	
+
+	TextView textView1;
+
 	static String SERVER_IP;
 	static final int SERVER_PORT = 10002;
-	
+
 	Handler handler = new Handler();
 	ServerSocket serverSocket;
-
-	//---get the local IPv4 address---
+	
+	MediaPlayer mpl;
+	
+	// ---get the local IPv4 address---
 	public String getLocalIpv4Address() {
 		try {
-			for (Enumeration<NetworkInterface> networkInterfaceEnum = NetworkInterface.getNetworkInterfaces(); networkInterfaceEnum.hasMoreElements();) {
-				NetworkInterface networkInterface = networkInterfaceEnum.nextElement();
-				for (Enumeration<InetAddress> ipAddressEnum = networkInterface.getInetAddresses(); ipAddressEnum.hasMoreElements();) {
-					InetAddress inetAddress = (InetAddress) ipAddressEnum.nextElement();
-					
+			for (Enumeration<NetworkInterface> networkInterfaceEnum = NetworkInterface
+					.getNetworkInterfaces(); networkInterfaceEnum
+					.hasMoreElements();) {
+				NetworkInterface networkInterface = networkInterfaceEnum
+						.nextElement();
+				for (Enumeration<InetAddress> ipAddressEnum = networkInterface
+						.getInetAddresses(); ipAddressEnum.hasMoreElements();) {
+					InetAddress inetAddress = (InetAddress) ipAddressEnum
+							.nextElement();
+
 					// ---check that it is not a loopback address and
 					// it is IPv4---
-					if (!inetAddress.isLoopbackAddress()&& InetAddressUtils.isIPv4Address(inetAddress.getHostAddress())) {
+					if (!inetAddress.isLoopbackAddress()
+							&& InetAddressUtils.isIPv4Address(inetAddress
+									.getHostAddress())) {
 						return inetAddress.getHostAddress();
 					}
 				}
@@ -53,6 +64,7 @@ TextView textView1;
 		}
 		return null;
 	}
+
 	// This is my input
 
 	// ************************************************
@@ -67,7 +79,8 @@ TextView textView1;
 		// Android device id
 		// first server (Jorge's phone) id: f2113d40eb7bd59a
 		// first client (Jonathan's phone) id: 2cc0cff86966c395
-		android_id = Secure.getString(this.getContentResolver(), Secure.ANDROID_ID);
+		android_id = Secure.getString(this.getContentResolver(),
+				Secure.ANDROID_ID);
 
 		Log.d("android id read by cell", android_id);
 
@@ -77,13 +90,18 @@ TextView textView1;
 
 		// getting rib of the status bar
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.appload_layout);
 		textView1 = (TextView) findViewById(R.id.textView1);
+		
+		mpl = MediaPlayer.create(LoadAppDeadlyWheel.this, R.raw.tech_background_cut);
+		mpl.setLooping(true);
+		mpl.start();
 
 	}
-	
+
 	public class ServerThread implements Runnable {
 		public void run() {
 			try {
@@ -91,63 +109,70 @@ TextView textView1;
 					handler.post(new Runnable() {
 						@Override
 						public void run() {
-							textView1.setText(textView1.getText() + "Server listening on IP: " + SERVER_IP + "\n");
+							textView1.setText(textView1.getText()
+									+ "Server listening on IP: " + SERVER_IP
+									+ "\n");
 						}
 					});
-					
 
-					//---create an instance of the server socket---
+					// ---create an instance of the server socket---
 					serverSocket = new ServerSocket(SERVER_PORT);
 
 					while (true) {
-						//---wait for incoming clients---
+						// ---wait for incoming clients---
 						Socket client = serverSocket.accept();
 
-						//---the above code is a blocking call;
+						// ---the above code is a blocking call;
 						// i.e. it will block until a client connects---
 
-						//---client has connected---
+						// ---client has connected---
 						handler.post(new Runnable() {
 							@Override
 							public void run() {
-								textView1.setText(textView1.getText() + "Connected to client." + "\n");
+								textView1.setText(textView1.getText()
+										+ "Connected to client." + "\n");
 							}
 						});
 
 						try {
-							//---get an InputStream object to read from the
+							// ---get an InputStream object to read from the
 							// socket---
-							BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()));
+							BufferedReader br = new BufferedReader(
+									new InputStreamReader(
+											client.getInputStream()));
 
-							OutputStream outputStream = client.getOutputStream();
+							OutputStream outputStream = client
+									.getOutputStream();
 
-							//---read all incoming data terminated with a \n
+							// ---read all incoming data terminated with a \n
 							// char---
 							String line = null;
 							while ((line = br.readLine()) != null) {
 								final String strReceived = line;
 
-								//---send whatever you received back to the
+								// ---send whatever you received back to the
 								// client---
 								String s = line + "\n";
 								outputStream.write(s.getBytes());
-								
+
 								handler.post(new Runnable() {
 									@Override
 									public void run() {
-										textView1.setText(textView1.getText() + strReceived + "\n");
+										textView1.setText(textView1.getText()
+												+ strReceived + "\n");
 									}
 								});
 							}
 
-							//---client has disconnected from the server---
+							// ---client has disconnected from the server---
 							handler.post(new Runnable() {
 								@Override
 								public void run() {
-									textView1.setText(textView1.getText() + "Client disconnected." + "\n");
+									textView1.setText(textView1.getText()
+											+ "Client disconnected." + "\n");
 								}
 							});
-							
+
 						} catch (Exception e) {
 							final String error = e.getLocalizedMessage();
 							handler.post(new Runnable() {
@@ -156,14 +181,16 @@ TextView textView1;
 									textView1.setText(textView1.getText()
 											+ error);
 								}
-							});							
+							});
 						}
 					}
 				} else {
 					handler.post(new Runnable() {
 						@Override
 						public void run() {
-							textView1.setText(textView1.getText() + "No internet connection on device."+ "\n");
+							textView1.setText(textView1.getText()
+									+ "No internet connection on device."
+									+ "\n");
 						}
 					});
 				}
@@ -176,46 +203,42 @@ TextView textView1;
 					}
 				});
 			}
-			
+
 			handler.post(new Runnable() {
 				@Override
 				public void run() {
-					textView1.setText(textView1.getText() + "\n" + "Server exited"
-							+ "\n");
+					textView1.setText(textView1.getText() + "\n"
+							+ "Server exited" + "\n");
 				}
 			});
 		}
 	}
-	
+
 	@Override
 	protected void onStart() {
 		super.onStart();
-		//---get the IP address of itself---
+		// ---get the IP address of itself---
 		SERVER_IP = getLocalIpv4Address();
 
-		//---start the server---
+		// ---start the server---
 		Thread serverThread = new Thread(new ServerThread());
 		serverThread.start();
 	}
-	
-	
 
 	@Override
 	protected void onStop() {
 		super.onStop();
-		try {			
+		try {
 			serverSocket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	/*@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
-	}*/
-	
+	/*
+	 * @Override public boolean onCreateOptionsMenu(Menu menu) {
+	 * getMenuInflater().inflate(R.menu.activity_main, menu); return true; }
+	 */
 
 	/**
 	 * Called when the user clicks on the image (for now) later it will be
@@ -223,7 +246,9 @@ TextView textView1;
 	 */
 	public void gotoLogin(View view) {
 
-		if (android_id.contains("f2113d40eb7bd59a") || android_id.contains("f02b4307b728b94c") || android_id.contains("694b02a18151671a")) {
+		if (android_id.contains("f2113d40eb7bd59a")
+				|| android_id.contains("f02b4307b728b94c")
+				|| android_id.contains("694b02a18151671a")) {
 			// *************************************************
 			// Creating Object to send the intent to start the Screen
 			// properties
@@ -234,7 +259,9 @@ TextView textView1;
 			startActivity(intent);
 		}
 
-		else if (android_id.contains("2cc0cff86966c395")|| android_id.contains("a5fb5698b3bd699c") || android_id.contains("c597067a9c7abbd3")) {
+		else if (android_id.contains("2cc0cff86966c395")
+				|| android_id.contains("a5fb5698b3bd699c")
+				|| android_id.contains("c597067a9c7abbd3")) {
 			// *************************************************
 			// Creating Object to send the intent right to the video
 			// screen

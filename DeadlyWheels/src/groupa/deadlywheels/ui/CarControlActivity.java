@@ -257,6 +257,10 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			NumberTwo.setVisibility(View.INVISIBLE);
 			NumberThree.setVisibility(View.VISIBLE);
 			NumberGO.setVisibility(View.INVISIBLE);
+
+			MediaPlayer mPlayer = MediaPlayer.create(CarControlActivity.this,
+					R.raw.beep);
+			mPlayer.start();
 		}
 
 		else if (interval == 2) {
@@ -264,6 +268,9 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			NumberTwo.setVisibility(View.VISIBLE);
 			NumberThree.setVisibility(View.INVISIBLE);
 			NumberGO.setVisibility(View.INVISIBLE);
+			MediaPlayer mPlayer = MediaPlayer.create(CarControlActivity.this,
+					R.raw.beep);
+			mPlayer.start();
 		}
 
 		else if (interval == 1) {
@@ -271,6 +278,9 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			NumberTwo.setVisibility(View.INVISIBLE);
 			NumberThree.setVisibility(View.INVISIBLE);
 			NumberGO.setVisibility(View.INVISIBLE);
+			MediaPlayer mPlayer = MediaPlayer.create(CarControlActivity.this,
+					R.raw.beep);
+			mPlayer.start();
 		}
 
 		else if (interval == 0) {
@@ -373,11 +383,11 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 				deltaY = (float) 0.0;
 			if (deltaZ < NOISE)
 				deltaZ = (float) 0.0;
-			
+
 			mLastX = x;
 			mLastY = y;
 			mLastZ = z;
-			
+
 			xAxisValue.setText(Float.toString(deltaX));
 			yAxisValue.setText(Float.toString(deltaY));
 			zAxisValue.setText(Float.toString(deltaZ));
