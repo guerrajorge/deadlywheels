@@ -12,19 +12,19 @@
         android:orientation="vertical" >
 
         <ImageButton
-            android:id="@+id/btnFrente"
+            android:id="@+id/btnForward"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:contentDescription="@string/btnFrente"
+            android:contentDescription="@string/bntForward"
             android:src="@drawable/up_arrow" />
 
         <ImageButton
-            android:id="@+id/btnRe"
+            android:id="@+id/bntBackward"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:contentDescription="@string/btnRe"
+            android:contentDescription="@string/btnBackward"
             android:src="@drawable/down_arrow" />
     </LinearLayout>
 
@@ -217,11 +217,11 @@
             android:src="@drawable/left_arrow" />
 
         <ImageButton
-            android:id="@+id/btnFarol"
+            android:id="@+id/btnLight"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:contentDescription="@string/btnFarol"
+            android:contentDescription="@string/btnLight"
             android:src="@drawable/ic_flashlight" />
     </LinearLayout>
 

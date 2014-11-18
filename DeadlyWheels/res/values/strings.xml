@@ -23,11 +23,11 @@
     <string name="brnPropriedades">Take the user to SystemProperties</string>
     <string name="singlemode">Singleplayer</string>
     <string name="multimode">Multiplayer</string>
-    <string name="btnFrente">Front button</string>
-    <string name="btnRe">btnRe</string>
+    <string name="bntForward">Front button</string>
+    <string name="btnBackward">Backward button</string>
     <string name="btnMarchaAumenta">btnMarchaAumenta</string>
     <string name="btnMarchaReduz">btnMarchaReduz</string>
-    <string name="btnFarol">btnFarol</string>
+    <string name="btnLight">Light button</string>
     <string name="hint">0</string>
     <string name="crack">Screen crack!</string>
     <string name="Hits">Hits</string>
