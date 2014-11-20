@@ -54,4 +54,5 @@
 <fullyQualifiedTypeName name="groupa.deadlywheels.R.raw"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="android.view.View.OnTouchListener"/>
 </qualifiedTypeNameHistroy>

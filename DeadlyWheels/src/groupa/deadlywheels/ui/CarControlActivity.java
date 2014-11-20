@@ -41,21 +41,10 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 	private CarDroiDuinoCore systemCore;
 
 	private DatagramSocketClientGate socketClientGate;
-
+	
 	private SensorManager mSensorManager;
 
 	private Sensor mAccelerometer;
-
-
-	ImageButton btnForward;
-	ImageButton bntBackward;
-	ImageButton btnLeft;
-	ImageButton btnRight;
-	ImageButton bntLight;
-
-	TextView xAxisValue;
-	TextView yAxisValue;
-	TextView zAxisValue;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -77,42 +66,86 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		this.clientServerPort = getIntent().getExtras().getString(
 				SystemProperties.KEY_PORT_NUMBER);
 
-		btnForward = (ImageButton) findViewById(R.id.btnForward);
-		bntBackward = (ImageButton) findViewById(R.id.bntBackward);
-		btnLeft = (ImageButton) findViewById(R.id.btnLeft);
-		btnRight = (ImageButton) findViewById(R.id.btnRight);
+		ImageButton btnFrente = (ImageButton) findViewById(R.id.btnFrente);
+		ImageButton btnRe = (ImageButton) findViewById(R.id.btnRe);
+		ImageButton btnLeft = (ImageButton) findViewById(R.id.btnLeft);
+		ImageButton btnRight = (ImageButton) findViewById(R.id.btnRight);
 
-		btnForward.setOnTouchListener(new View.OnTouchListener() {
+		btnFrente.setOnTouchListener(new View.OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.102/?forward");
+					commandArduino("http://192.168.100.107/?forward");
 
 				else if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.102/?stop");
+					commandArduino("http://192.168.100.107/?stop");
 
 				return true;
 
 			}
 		});
 
-		bntBackward.setOnTouchListener(new OnTouchListener() {
+		btnRe.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.102/?reverse");
+					commandArduino("http://192.168.100.107/?reverse");
 
 				else if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.102/?stop");
+					commandArduino("http://192.168.100.107/?stop");
 
 				return true;
 
 			}
 		});
 
-		bntLight = (ImageButton) findViewById(R.id.btnLight);
+		btnRe.setOnTouchListener(new OnTouchListener() {
 
-		bntLight.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN)
+					commandArduino("http://192.168.100.107/?reverse");
+
+				else if (event.getAction() == MotionEvent.ACTION_UP)
+					commandArduino("http://192.168.100.107/?stop");
+
+				return true;
+			}
+		});
+
+		btnLeft.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN)
+					commandArduino("http://192.168.100.107/?left");
+
+				else if (event.getAction() == MotionEvent.ACTION_UP)
+					commandArduino("http://192.168.100.107/?servo");
+
+				return true;
+
+			}
+		});
+
+		btnRight.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN)
+					commandArduino("http://192.168.100.107/?right");
+
+				else if (event.getAction() == MotionEvent.ACTION_UP)
+					commandArduino("http://192.168.100.107/?servo");
+
+				return true;
+
+			}
+		});
+
+		ImageButton btnLanterna = (ImageButton) findViewById(R.id.btnFarol);
+
+		btnLanterna.setOnTouchListener(new View.OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
 					ligarDesligarLanterna();
@@ -149,12 +182,6 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 
 	private void start_counter() {
 		final Handler handler = new Handler();
-
-		btnForward.setEnabled(false);
-		bntBackward.setEnabled(false);
-		btnLeft.setEnabled(false);
-		btnRight.setEnabled(false);
-		bntLight.setEnabled(false);
 
 		handler.postDelayed(new Runnable() {
 			@Override
@@ -209,12 +236,6 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 				start_countdown(interval);
 			}
 		}, 9000);
-
-		btnForward.setEnabled(true);
-		bntBackward.setEnabled(true);
-		btnLeft.setEnabled(true);
-		btnRight.setEnabled(true);
-		bntLight.setEnabled(true);
 
 	}
 
@@ -330,19 +351,23 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 	}
-	
+
+	@SuppressLint("FloatMath")
 	public void onSensorChanged(SensorEvent event) {
 
-		xAxisValue = (TextView) findViewById(R.id.xAxisValue);
-		yAxisValue = (TextView) findViewById(R.id.yAxisValue);
-		zAxisValue = (TextView) findViewById(R.id.zAxisValue);
+		TextView xAxisValue = (TextView) findViewById(R.id.xAxisValue);
+		TextView yAxisValue = (TextView) findViewById(R.id.yAxisValue);
+		TextView zAxisValue = (TextView) findViewById(R.id.zAxisValue);
 
 		float x = event.values[0];
 		float y = event.values[1];
 		float z = event.values[2];
 
 		xAxisValue.setText(Float.toString(x));
+		yAxisValue.setText(Float.toString(y));
+		zAxisValue.setText(Float.toString(z));
 
+		/*
 		if (y > -2) {
 			yAxisValue.setText("right");
 			commandArduino("http://192.168.100.102/?right");
@@ -354,6 +379,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			commandArduino("http://192.168.100.102/?servo");
 		}
 		zAxisValue.setText(Float.toString(z));
+		*/
 
 	}
 
