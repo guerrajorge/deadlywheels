@@ -12,10 +12,15 @@ import groupa.deadlywheels.utils.SystemProperties;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.hardware.Camera;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,6 +29,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.EditText;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 /**
  * <p>
@@ -38,7 +44,7 @@ import android.widget.ScrollView;
  * 
  */
 public class CarServerActivity extends Activity implements
-		SurfaceHolder.Callback {
+		SurfaceHolder.Callback, SensorEventListener {
 
 	/**
 	 * IP Address of Remote Control Car
@@ -101,6 +107,10 @@ public class CarServerActivity extends Activity implements
 	 */
 	private boolean isThreadsInitialided = false;
 
+	private SensorManager mSensorManager;
+
+	private Sensor mAccelerometer;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -147,6 +157,12 @@ public class CarServerActivity extends Activity implements
 		// *************************************************
 		// Initialize of the server of the car
 		this.setupServer();
+		
+		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+		mAccelerometer = mSensorManager
+				.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		mSensorManager.registerListener(this, mAccelerometer,
+				SensorManager.SENSOR_DELAY_NORMAL);
 	}
 
 	/**
@@ -381,5 +397,27 @@ public class CarServerActivity extends Activity implements
 		// Killing of Server Threads
 		this.internalCommandServerGate.turnOff();
 		this.socketServerGate.turnOff();
+	}
+
+	@Override
+	public void onAccuracyChanged(Sensor arg0, int arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+		TextView xAxisValue = (TextView) findViewById(R.id.xAxisValue);
+		TextView yAxisValue = (TextView) findViewById(R.id.yAxisValue);
+		TextView zAxisValue = (TextView) findViewById(R.id.zAxisValue);
+
+		float x = event.values[0];
+		float y = event.values[1];
+		float z = event.values[2];
+
+		xAxisValue.setText(Float.toString(x));
+		yAxisValue.setText(Float.toString(y));
+		zAxisValue.setText(Float.toString(z));
+		
 	}
 }

@@ -36,8 +36,7 @@
         <groupa.deadlywheels.ui.FrameView
             android:id="@+id/surfaceControl"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:onClick="cracksound" />
+            android:layout_height="fill_parent" />
 
         <TextView
             android:id="@+id/textView1"
@@ -75,7 +74,6 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:contentDescription="@string/crack"
-            android:onClick="gotoLogin"
             android:scaleType="fitXY"
             android:src="@raw/crack"
             android:visibility="gone" />
@@ -88,7 +86,6 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:contentDescription="@string/one"
-            android:onClick="gotoLogin"
             android:scaleType="fitXY"
             android:src="@raw/one"
             android:visibility="gone" />
@@ -101,7 +98,6 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:contentDescription="@string/two"
-            android:onClick="gotoLogin"
             android:scaleType="fitXY"
             android:src="@raw/two"
             android:visibility="gone" />
@@ -114,7 +110,6 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:contentDescription="@string/three"
-            android:onClick="gotoLogin"
             android:scaleType="fitXY"
             android:src="@raw/three"
             android:visibility="gone" />
@@ -127,7 +122,6 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:contentDescription="@string/go"
-            android:onClick="gotoLogin"
             android:scaleType="fitXY"
             android:src="@raw/go"
             android:visibility="gone" />
