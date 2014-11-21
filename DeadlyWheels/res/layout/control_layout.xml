@@ -17,8 +17,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:contentDescription="@string/btnFrente"
-            android:src="@drawable/up_arrow"
-            android:clickable="false" />
+            android:src="@drawable/up_arrow" />
 
         <ImageButton
             android:id="@+id/btnRe"
@@ -26,8 +25,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:contentDescription="@string/btnRe"
-            android:src="@drawable/down_arrow"
-            android:clickable="false" />
+            android:src="@drawable/down_arrow" />
     </LinearLayout>
 
     <RelativeLayout
@@ -215,8 +213,7 @@
             android:layout_height="200dp"
             android:layout_weight="2"
             android:contentDescription="@string/btnMarchaReduz"
-            android:src="@drawable/right_arrow" 
-            android:clickable="false"/>
+            android:src="@drawable/right_arrow" />
 
         <ImageButton
             android:id="@+id/btnFarol"
@@ -224,8 +221,7 @@
             android:layout_height="200dp"
             android:layout_weight="2"
             android:contentDescription="@string/btnFarol"
-            android:src="@drawable/ic_flashlight" 
-            android:clickable="false"/>
+            android:src="@drawable/ic_flashlight" />
     </LinearLayout>
 
 </LinearLayout>
