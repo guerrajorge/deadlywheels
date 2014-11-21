@@ -21,12 +21,12 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.view.View.OnTouchListener;
 
 @SuppressLint("ClickableViewAccessibility")
 public class CarControlActivity extends Activity implements SensorEventListener {
@@ -45,13 +45,20 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 	private SensorManager mSensorManager;
 
 	private Sensor mAccelerometer;
+
+	ImageButton btnFrente;
 	
+	ImageButton btnRe;
+	
+	ImageButton btnLeft;
+	ImageButton btnRight; 
+
+	public Boolean game_started;
+
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		
-		
-		
+
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
@@ -69,54 +76,39 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		this.clientServerPort = getIntent().getExtras().getString(
 				SystemProperties.KEY_PORT_NUMBER);
 
-		ImageButton btnFrente = (ImageButton) findViewById(R.id.btnFrente);
-		ImageButton btnRe = (ImageButton) findViewById(R.id.btnRe);
-		ImageButton btnLeft = (ImageButton) findViewById(R.id.btnLeft);
-		ImageButton btnRight = (ImageButton) findViewById(R.id.btnRight);
-		
+		btnFrente = (ImageButton) findViewById(R.id.btnFrente);
+		btnRe = (ImageButton) findViewById(R.id.btnRe);
+		 btnLeft = (ImageButton) findViewById(R.id.btnLeft);
+		 btnRight = (ImageButton) findViewById(R.id.btnRight);
 
 		btnFrente.setOnTouchListener(new View.OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.107/?forward");
+				if (game_started) {
+					if (event.getAction() == MotionEvent.ACTION_DOWN)
+						commandArduino("http://192.168.100.107/?forward");
 
-				else if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.107/?stop");
-
+					else if (event.getAction() == MotionEvent.ACTION_UP)
+						commandArduino("http://192.168.100.107/?stop");
+				}
 				return true;
 
 			}
 		});
 
-		btnRe.setOnTouchListener(new OnTouchListener() {
-
-			@Override
+		btnRe.setOnTouchListener(new View.OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.107/?reverse");
+				if (game_started) {
+					if (event.getAction() == MotionEvent.ACTION_DOWN)
+						commandArduino("http://192.168.100.107/?reverse");
 
-				else if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.107/?stop");
-
+					else if (event.getAction() == MotionEvent.ACTION_UP)
+						commandArduino("http://192.168.100.107/?stop");
+				}
 				return true;
 
 			}
 		});
-
-		btnRe.setOnTouchListener(new OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.107/?reverse");
-
-				else if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.107/?stop");
-
-				return true;
-			}
-		});
-
+		
 		btnLeft.setOnTouchListener(new OnTouchListener() {
 
 			@Override
@@ -173,14 +165,14 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		 * 
 		 * } });
 		 */
-		
+
 		start_counter();
-		
-		
 
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-		mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-		mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+		mAccelerometer = mSensorManager
+				.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		mSensorManager.registerListener(this, mAccelerometer,
+				SensorManager.SENSOR_DELAY_NORMAL);
 
 	}
 
@@ -194,7 +186,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 				// Do something after 5s = 5000ms
 				start_countdown(interval);
 			}
-		}, 1000);
+		}, 500);
 
 		handler.postDelayed(new Runnable() {
 			@Override
@@ -203,7 +195,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 				// Do something after 5s = 5000ms
 				start_countdown(interval);
 			}
-		}, 2500);
+		}, 1500);
 
 		handler.postDelayed(new Runnable() {
 			@Override
@@ -212,7 +204,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 				// Do something after 5s = 5000ms
 				start_countdown(interval);
 			}
-		}, 4000);
+		}, 2500);
 
 		handler.postDelayed(new Runnable() {
 			@Override
@@ -221,7 +213,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 				// Do something after 5s = 5000ms
 				start_countdown(interval);
 			}
-		}, 5500);
+		}, 3500);
 
 		handler.postDelayed(new Runnable() {
 			@Override
@@ -230,8 +222,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 				// Do something after 5s = 5000ms
 				start_countdown(interval);
 			}
-		}, 6000);
-
+		}, 4500);
 
 	}
 
@@ -247,8 +238,10 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			NumberTwo.setVisibility(View.INVISIBLE);
 			NumberThree.setVisibility(View.VISIBLE);
 			NumberGO.setVisibility(View.INVISIBLE);
+			game_started = false;
 
-			MediaPlayer mPlayer = MediaPlayer.create(CarControlActivity.this, R.raw.beep);
+			MediaPlayer mPlayer = MediaPlayer.create(CarControlActivity.this,
+					R.raw.beep);
 			mPlayer.start();
 		}
 
@@ -257,7 +250,8 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			NumberTwo.setVisibility(View.VISIBLE);
 			NumberThree.setVisibility(View.INVISIBLE);
 			NumberGO.setVisibility(View.INVISIBLE);
-			MediaPlayer mPlayer = MediaPlayer.create(CarControlActivity.this, R.raw.beep);
+			MediaPlayer mPlayer = MediaPlayer.create(CarControlActivity.this,
+					R.raw.beep);
 			mPlayer.start();
 		}
 
@@ -266,7 +260,8 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			NumberTwo.setVisibility(View.INVISIBLE);
 			NumberThree.setVisibility(View.INVISIBLE);
 			NumberGO.setVisibility(View.INVISIBLE);
-			MediaPlayer mPlayer = MediaPlayer.create(CarControlActivity.this, R.raw.beep);
+			MediaPlayer mPlayer = MediaPlayer.create(CarControlActivity.this,
+					R.raw.beep);
 			mPlayer.start();
 		}
 
@@ -282,9 +277,9 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			NumberTwo.setVisibility(View.INVISIBLE);
 			NumberThree.setVisibility(View.INVISIBLE);
 			NumberGO.setVisibility(View.INVISIBLE);
+			game_started = true;
 		}
 
-		
 	}
 
 	private void setupClient() {
@@ -355,17 +350,17 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		yAxisValue.setText(Float.toString(y));
 		zAxisValue.setText(Float.toString(z));
 
-			if (y > -2) {
-				yAxisValue.setText("right");
-				commandArduino("http://192.168.100.107/?right");
-			} else if (y < 2) {
-				yAxisValue.setText("left");
-				commandArduino("http://192.168.100.107/?left");
-			} else {
-				yAxisValue.setText("servo");
-				commandArduino("http://192.168.100.107/?servo");
-			}
-			zAxisValue.setText(Float.toString(z));
+		if (y > -2) {
+			yAxisValue.setText("right");
+			commandArduino("http://192.168.100.107/?right");
+		} else if (y < 2) {
+			yAxisValue.setText("left");
+			commandArduino("http://192.168.100.107/?left");
+		} else {
+			yAxisValue.setText("servo");
+			commandArduino("http://192.168.100.107/?servo");
 		}
+		zAxisValue.setText(Float.toString(z));
+	}
 
 }
