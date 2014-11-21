@@ -73,7 +73,6 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		ImageButton btnRe = (ImageButton) findViewById(R.id.btnRe);
 		ImageButton btnLeft = (ImageButton) findViewById(R.id.btnLeft);
 		ImageButton btnRight = (ImageButton) findViewById(R.id.btnRight);
-		
 
 		btnFrente.setOnTouchListener(new View.OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
@@ -175,7 +174,6 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		 */
 		
 		start_counter();
-		
 		
 
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
