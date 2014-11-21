@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:contentDescription="@string/btnFrente"
-            android:src="@drawable/up_arrow" />
+            android:src="@drawable/up_arrow"/>
 
         <ImageButton
             android:id="@+id/btnRe"
@@ -221,7 +221,7 @@
             android:layout_height="200dp"
             android:layout_weight="2"
             android:contentDescription="@string/btnFarol"
-            android:src="@drawable/ic_flashlight" />
+            android:src="@drawable/ic_flashlight"  />
     </LinearLayout>
 
 </LinearLayout>

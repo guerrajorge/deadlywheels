@@ -46,6 +46,8 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 
 	private Sensor mAccelerometer;
 	
+	private Boolean enable;
+	
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -92,10 +94,10 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getAction() == MotionEvent.ACTION_DOWN)
+				if (event.getAction() == MotionEvent.ACTION_DOWN & enable)
 					commandArduino("http://192.168.100.107/?reverse");
 
-				else if (event.getAction() == MotionEvent.ACTION_UP)
+				else if (event.getAction() == MotionEvent.ACTION_UP & enable)
 					commandArduino("http://192.168.100.107/?stop");
 
 				return true;
