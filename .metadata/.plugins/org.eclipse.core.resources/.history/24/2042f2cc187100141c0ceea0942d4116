@@ -48,9 +48,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 	
 	@SuppressLint("NewApi")
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		
-		
+	public void onCreate(Bundle savedInstanceState) {		
 		
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 				.permitAll().build();
@@ -69,11 +67,29 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		this.clientServerPort = getIntent().getExtras().getString(
 				SystemProperties.KEY_PORT_NUMBER);
 
+		
+		this.surfaceView = (FrameView) findViewById(R.id.surfaceControl);
+
+		this.setupClient();
+
+		/**
+		 * ImageView crackview = (ImageView) findViewById(R.id.crackview);
+		 * crackview.setOnTouchListener(new View.OnTouchListener() { public
+		 * boolean onTouch(View v, MotionEvent event) { MediaPlayer mPlayer =
+		 * MediaPlayer.create(CarControlActivity.this, R.raw.glass);
+		 * mPlayer.start();
+		 * 
+		 * return true;
+		 * 
+		 * } });
+		 */
+		
+		start_counter();
+		
 		ImageButton btnFrente = (ImageButton) findViewById(R.id.btnFrente);
 		ImageButton btnRe = (ImageButton) findViewById(R.id.btnRe);
 		ImageButton btnLeft = (ImageButton) findViewById(R.id.btnLeft);
 		ImageButton btnRight = (ImageButton) findViewById(R.id.btnRight);
-		
 
 		btnFrente.setOnTouchListener(new View.OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
@@ -158,24 +174,6 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			}
 		});
 
-		this.surfaceView = (FrameView) findViewById(R.id.surfaceControl);
-
-		this.setupClient();
-
-		/**
-		 * ImageView crackview = (ImageView) findViewById(R.id.crackview);
-		 * crackview.setOnTouchListener(new View.OnTouchListener() { public
-		 * boolean onTouch(View v, MotionEvent event) { MediaPlayer mPlayer =
-		 * MediaPlayer.create(CarControlActivity.this, R.raw.glass);
-		 * mPlayer.start();
-		 * 
-		 * return true;
-		 * 
-		 * } });
-		 */
-		
-		start_counter();
-		
 		
 
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
