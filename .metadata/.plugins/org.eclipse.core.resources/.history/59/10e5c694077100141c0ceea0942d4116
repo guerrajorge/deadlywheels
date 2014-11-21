@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:keepScreenOn="true"
+    android:orientation="horizontal" >
+
+    <SurfaceView
+        android:id="@+id/surface"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    
+    <TextView
+            android:id="@+id/textView1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:scrollbars="vertical" />
+    
+    <TextView
+            android:id="@+id/y_axis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/HitsLabel"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="36dp"
+            android:text="@string/YAxis"
+            android:textColor="#FFAA66CC"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/yAxisValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/y_axis"
+            android:layout_marginLeft="56dp"
+            android:layout_toRightOf="@+id/y_axis"
+            android:text="@string/empty"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/x_axis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/y_axis"
+            android:layout_alignLeft="@+id/z_axis"
+            android:text="@string/XAxis"
+            android:textColor="#FFAA66CC"
+            android:textSize="15sp" />
+        
+        <TextView
+            android:id="@+id/xAxisValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/x_axis"
+            android:layout_marginLeft="56dp"
+            android:layout_toRightOf="@+id/x_axis"
+            android:text="@string/empty"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/z_axis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="14dp"
+            android:layout_toRightOf="@+id/textView1"
+            android:text="@string/ZAxis"
+            android:textColor="#FFAA66CC"
+            android:textSize="15sp" />
+        
+        <TextView
+            android:id="@+id/zAxisValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/z_axis"
+            android:layout_marginLeft="56dp"
+            android:layout_toRightOf="@+id/z_axis"
+            android:text="@string/empty"
+            android:textSize="15sp" />
+    </RelativeLayout>
