@@ -28,7 +28,7 @@
             android:src="@drawable/down_arrow" />
     </LinearLayout>
 
-   <RelativeLayout
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1" >
@@ -66,6 +66,18 @@
             android:textColor="#FFAA66CC"
             android:textSize="15sp" />
 
+        <ImageView
+            android:id="@+id/crackview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/crack"
+            android:onClick="gotoLogin"
+            android:scaleType="fitXY"
+            android:src="@raw/crack"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/numberone"
@@ -111,6 +123,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:contentDescription="@string/go"
+            android:onClick="gotoLogin"
             android:scaleType="fitXY"
             android:src="@raw/go"
             android:visibility="gone" />

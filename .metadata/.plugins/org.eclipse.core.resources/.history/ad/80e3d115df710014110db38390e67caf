@@ -41,7 +41,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 	private CarDroiDuinoCore systemCore;
 
 	private DatagramSocketClientGate socketClientGate;
-
+	
 	private SensorManager mSensorManager;
 
 	private Sensor mAccelerometer;
@@ -84,7 +84,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			}
 		});
 
-		btnRe.setOnTouchListener(new View.OnTouchListener() {
+		btnRe.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -99,7 +99,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			}
 		});
 
-		btnRe.setOnTouchListener(new View.OnTouchListener() {
+		btnRe.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -113,7 +113,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			}
 		});
 
-		btnLeft.setOnTouchListener(new View.OnTouchListener() {
+		btnLeft.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -368,14 +368,18 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		zAxisValue.setText(Float.toString(z));
 
 		/*
-		 * if (y > -2) { yAxisValue.setText("right");
-		 * commandArduino("http://192.168.100.102/?right"); } else if (y < 2) {
-		 * yAxisValue.setText("left");
-		 * commandArduino("http://192.168.100.102/?left"); } else {
-		 * yAxisValue.setText("servo");
-		 * commandArduino("http://192.168.100.102/?servo"); }
-		 * zAxisValue.setText(Float.toString(z));
-		 */
+		if (y > -2) {
+			yAxisValue.setText("right");
+			commandArduino("http://192.168.100.102/?right");
+		} else if (y < 2) {
+			yAxisValue.setText("left");
+			commandArduino("http://192.168.100.102/?left");
+		} else {
+			yAxisValue.setText("servo");
+			commandArduino("http://192.168.100.102/?servo");
+		}
+		zAxisValue.setText(Float.toString(z));
+		*/
 
 	}
 
