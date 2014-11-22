@@ -345,15 +345,16 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		yAxisValue.setText(Float.toString(y));
 		zAxisValue.setText(Float.toString(z));
 
-		if (y > -2) {
-			yAxisValue.setText("right");
-			commandArduino("http://192.168.100.107/?right");
-		} else if (y < 2) {
+		if (y < -.5) {
 			yAxisValue.setText("left");
 			commandArduino("http://192.168.100.107/?left");
-		} else {
-			yAxisValue.setText("servo");
+		} else if (y > .5) {
+			yAxisValue.setText("right");
+			commandArduino("http://192.168.100.107/?right");
+		} else{
+			yAxisValue.setText("middle");
 			commandArduino("http://192.168.100.107/?servo");
+			
 		}
 		zAxisValue.setText(Float.toString(z));
 	}

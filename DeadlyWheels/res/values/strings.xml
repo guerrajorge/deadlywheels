@@ -43,5 +43,6 @@
     <string name="YAxis">Y-Axis: </string>
     <string name="ZAxis">Z-Axis: </string>
     <string name="empty"></string>
+    <string name="finishline">Finish Line</string>
     
 </resources>
