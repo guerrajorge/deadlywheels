@@ -6,12 +6,13 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="192.168.100.102" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="192.168.100.107"/>
 			<item value="onResum"/>
 			<item value="on"/>
 			<item value="TAG"/>
@@ -19,9 +20,9 @@
 			<item value="volumeString"/>
 			<item value="zAxisValue"/>
 			<item value="xAxisValue"/>
-			<item value="Onresume"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
 			<item value="groupa.deadlywheels"/>
 		</list>
 	</section>
