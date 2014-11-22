@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ColorBlobDetector.java&apos; to &apos;DeadlyWheels/src/groupa.deadlywheels.ui&apos;&#x0A;- Original project: &apos;OpenCV Sample - color-blob-detection&apos;&#x0A;- Destination element: &apos;DeadlyWheels/src/groupa.deadlywheels.ui&apos;&#x0A;- Original element: &apos;org.opencv.samples.colorblobdetect.ColorBlobDetector.java&apos;" description="Copy compilation unit" destination="=DeadlyWheels/src&lt;groupa.deadlywheels.ui" element1="/src&lt;org.opencv.samples.colorblobdetect{ColorBlobDetector.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1416628909355" units="1" version="1.0"/>
+</session>
