@@ -17,8 +17,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:contentDescription="@string/btnFrente"
-            android:src="@drawable/up_arrow"
-            android:clickable="false" />
+            android:src="@drawable/up_arrow" />
 
         <ImageButton
             android:id="@+id/btnRe"
@@ -26,8 +25,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:contentDescription="@string/btnRe"
-            android:src="@drawable/down_arrow"
-            android:clickable="false" />
+            android:src="@drawable/down_arrow" />
     </LinearLayout>
 
     <RelativeLayout
@@ -38,7 +36,8 @@
         <groupa.deadlywheels.ui.FrameView
             android:id="@+id/surfaceControl"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
+            android:layout_height="fill_parent"
+            android:onClick="cracksound" />
 
         <TextView
             android:id="@+id/textView1"
@@ -76,6 +75,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:contentDescription="@string/crack"
+            android:onClick="gotoLogin"
             android:scaleType="fitXY"
             android:src="@raw/crack"
             android:visibility="gone" />
@@ -88,6 +88,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:contentDescription="@string/one"
+            android:onClick="gotoLogin"
             android:scaleType="fitXY"
             android:src="@raw/one"
             android:visibility="gone" />
@@ -100,6 +101,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:contentDescription="@string/two"
+            android:onClick="gotoLogin"
             android:scaleType="fitXY"
             android:src="@raw/two"
             android:visibility="gone" />
@@ -112,6 +114,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:contentDescription="@string/three"
+            android:onClick="gotoLogin"
             android:scaleType="fitXY"
             android:src="@raw/three"
             android:visibility="gone" />
@@ -124,6 +127,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:contentDescription="@string/go"
+            android:onClick="gotoLogin"
             android:scaleType="fitXY"
             android:src="@raw/go"
             android:visibility="gone" />
@@ -215,8 +219,7 @@
             android:layout_height="200dp"
             android:layout_weight="2"
             android:contentDescription="@string/btnMarchaReduz"
-            android:src="@drawable/right_arrow" 
-            android:clickable="false"/>
+            android:src="@drawable/right_arrow" />
 
         <ImageButton
             android:id="@+id/btnFarol"
@@ -224,8 +227,7 @@
             android:layout_height="200dp"
             android:layout_weight="2"
             android:contentDescription="@string/btnFarol"
-            android:src="@drawable/ic_flashlight" 
-            android:clickable="false"/>
+            android:src="@drawable/ic_flashlight" />
     </LinearLayout>
 
 </LinearLayout>

@@ -41,17 +41,14 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 	private CarDroiDuinoCore systemCore;
 
 	private DatagramSocketClientGate socketClientGate;
-
+	
 	private SensorManager mSensorManager;
 
 	private Sensor mAccelerometer;
 
-	//public Boolean game_started;
-
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
@@ -76,33 +73,47 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 
 		btnFrente.setOnTouchListener(new View.OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
-					if (event.getAction() == MotionEvent.ACTION_DOWN)
-						commandArduino("http://192.168.100.107/?forward");
+				if (event.getAction() == MotionEvent.ACTION_DOWN)
+					commandArduino("http://192.168.100.107/?forward");
 
-					else if (event.getAction() == MotionEvent.ACTION_UP)
-						commandArduino("http://192.168.100.107/?stop");
-				
+				else if (event.getAction() == MotionEvent.ACTION_UP)
+					commandArduino("http://192.168.100.107/?stop");
+
 				return true;
 
 			}
 		});
 
-		btnRe.setOnTouchListener(new View.OnTouchListener() {
+		btnRe.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-					if (event.getAction() == MotionEvent.ACTION_DOWN)
-						commandArduino("http://192.168.100.107/?reverse");
+				if (event.getAction() == MotionEvent.ACTION_DOWN)
+					commandArduino("http://192.168.100.107/?reverse");
 
-					else if (event.getAction() == MotionEvent.ACTION_UP)
-						commandArduino("http://192.168.100.107/?stop");
-				
+				else if (event.getAction() == MotionEvent.ACTION_UP)
+					commandArduino("http://192.168.100.107/?stop");
+
 				return true;
 
 			}
 		});
 
-		btnLeft.setOnTouchListener(new View.OnTouchListener() {
+		btnRe.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN)
+					commandArduino("http://192.168.100.107/?reverse");
+
+				else if (event.getAction() == MotionEvent.ACTION_UP)
+					commandArduino("http://192.168.100.107/?stop");
+
+				return true;
+			}
+		});
+
+		btnLeft.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -117,7 +128,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			}
 		});
 
-		btnRight.setOnTouchListener(new View.OnTouchListener() {
+		btnRight.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -159,7 +170,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		 * } });
 		 */
 
-		//start_counter();
+		start_counter();
 
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		mAccelerometer = mSensorManager
@@ -169,7 +180,6 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 
 	}
 
-	/*
 	private void start_counter() {
 		final Handler handler = new Handler();
 
@@ -189,7 +199,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 				// Do something after 5s = 5000ms
 				start_countdown(interval);
 			}
-		}, 2500);
+		}, 3000);
 
 		handler.postDelayed(new Runnable() {
 			@Override
@@ -198,7 +208,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 				// Do something after 5s = 5000ms
 				start_countdown(interval);
 			}
-		}, 4000);
+		}, 5000);
 
 		handler.postDelayed(new Runnable() {
 			@Override
@@ -207,7 +217,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 				// Do something after 5s = 5000ms
 				start_countdown(interval);
 			}
-		}, 5500);
+		}, 7000);
 
 		handler.postDelayed(new Runnable() {
 			@Override
@@ -216,7 +226,16 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 				// Do something after 5s = 5000ms
 				start_countdown(interval);
 			}
-		}, 6000);
+		}, 9000);
+
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				int interval = 8;
+				// Do something after 5s = 5000ms
+				start_countdown(interval);
+			}
+		}, 9000);
 
 	}
 
@@ -228,7 +247,6 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		ImageView NumberGO = (ImageView) findViewById(R.id.numbergo);
 
 		if (interval == 3) {
-			//game_started = false;
 			NumberOne.setVisibility(View.INVISIBLE);
 			NumberTwo.setVisibility(View.INVISIBLE);
 			NumberThree.setVisibility(View.VISIBLE);
@@ -270,12 +288,16 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			NumberOne.setVisibility(View.INVISIBLE);
 			NumberTwo.setVisibility(View.INVISIBLE);
 			NumberThree.setVisibility(View.INVISIBLE);
-			NumberGO.setVisibility(View.INVISIBLE);
-			//game_started = true;
+			NumberGO.setVisibility(View.VISIBLE);
 		}
 
+		else if (interval == 7) {
+			NumberOne.setVisibility(View.INVISIBLE);
+			NumberTwo.setVisibility(View.INVISIBLE);
+			NumberThree.setVisibility(View.INVISIBLE);
+			NumberGO.setVisibility(View.INVISIBLE);
+		}
 	}
-	*/
 
 	private void setupClient() {
 
@@ -345,17 +367,20 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		yAxisValue.setText(Float.toString(y));
 		zAxisValue.setText(Float.toString(z));
 
+		/*
 		if (y > -2) {
 			yAxisValue.setText("right");
-			commandArduino("http://192.168.100.107/?right");
+			commandArduino("http://192.168.100.102/?right");
 		} else if (y < 2) {
 			yAxisValue.setText("left");
-			commandArduino("http://192.168.100.107/?left");
+			commandArduino("http://192.168.100.102/?left");
 		} else {
 			yAxisValue.setText("servo");
-			commandArduino("http://192.168.100.107/?servo");
+			commandArduino("http://192.168.100.102/?servo");
 		}
 		zAxisValue.setText(Float.toString(z));
+		*/
+
 	}
 
 }
