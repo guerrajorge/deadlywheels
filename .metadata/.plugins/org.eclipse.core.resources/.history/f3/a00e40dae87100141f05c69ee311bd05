@@ -17,6 +17,11 @@ import android.view.WindowManager;
         Intent intent = new Intent(this, CarDroidDuinoActivity.class);
         startActivity(intent);
     }
+    
+    public void refereeMode(View view) {
+        Intent refereeIntent = new Intent(this, Referee.class);
+        startActivity(refereeIntent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
