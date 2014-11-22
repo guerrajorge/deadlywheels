@@ -117,7 +117,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			}
 		});
 
-		btnRight.setOnTouchListener(new View.OnTouchListener() {
+		btnRight.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -169,7 +169,6 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 
 	}
 
-	/*
 	private void start_counter() {
 		final Handler handler = new Handler();
 
@@ -275,7 +274,6 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		}
 
 	}
-	*/
 
 	private void setupClient() {
 

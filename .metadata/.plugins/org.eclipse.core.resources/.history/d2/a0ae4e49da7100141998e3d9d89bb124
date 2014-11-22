@@ -46,7 +46,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 
 	private Sensor mAccelerometer;
 
-	//public Boolean game_started;
+	public Boolean game_started;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -76,33 +76,35 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 
 		btnFrente.setOnTouchListener(new View.OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
+				if (game_started) {
 					if (event.getAction() == MotionEvent.ACTION_DOWN)
 						commandArduino("http://192.168.100.107/?forward");
 
 					else if (event.getAction() == MotionEvent.ACTION_UP)
 						commandArduino("http://192.168.100.107/?stop");
-				
+				}
 				return true;
 
 			}
 		});
 
-		btnRe.setOnTouchListener(new View.OnTouchListener() {
+		btnRe.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
+				if (game_started) {
 					if (event.getAction() == MotionEvent.ACTION_DOWN)
 						commandArduino("http://192.168.100.107/?reverse");
 
 					else if (event.getAction() == MotionEvent.ACTION_UP)
 						commandArduino("http://192.168.100.107/?stop");
-				
+				}
 				return true;
 
 			}
 		});
 
-		btnLeft.setOnTouchListener(new View.OnTouchListener() {
+		btnLeft.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -117,7 +119,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			}
 		});
 
-		btnRight.setOnTouchListener(new View.OnTouchListener() {
+		btnRight.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -159,7 +161,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		 * } });
 		 */
 
-		//start_counter();
+		start_counter();
 
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		mAccelerometer = mSensorManager
@@ -169,7 +171,6 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 
 	}
 
-	/*
 	private void start_counter() {
 		final Handler handler = new Handler();
 
@@ -228,7 +229,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		ImageView NumberGO = (ImageView) findViewById(R.id.numbergo);
 
 		if (interval == 3) {
-			//game_started = false;
+			game_started = false;
 			NumberOne.setVisibility(View.INVISIBLE);
 			NumberTwo.setVisibility(View.INVISIBLE);
 			NumberThree.setVisibility(View.VISIBLE);
@@ -271,11 +272,10 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			NumberTwo.setVisibility(View.INVISIBLE);
 			NumberThree.setVisibility(View.INVISIBLE);
 			NumberGO.setVisibility(View.INVISIBLE);
-			//game_started = true;
+			game_started = true;
 		}
 
 	}
-	*/
 
 	private void setupClient() {
 

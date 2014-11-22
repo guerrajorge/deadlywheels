@@ -87,7 +87,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			}
 		});
 
-		btnRe.setOnTouchListener(new View.OnTouchListener() {
+		btnRe.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -102,7 +102,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			}
 		});
 
-		btnLeft.setOnTouchListener(new View.OnTouchListener() {
+		btnLeft.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -117,7 +117,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			}
 		});
 
-		btnRight.setOnTouchListener(new View.OnTouchListener() {
+		btnRight.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -159,7 +159,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		 * } });
 		 */
 
-		//start_counter();
+		start_counter();
 
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		mAccelerometer = mSensorManager
@@ -169,7 +169,6 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 
 	}
 
-	/*
 	private void start_counter() {
 		final Handler handler = new Handler();
 
@@ -271,11 +270,10 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			NumberTwo.setVisibility(View.INVISIBLE);
 			NumberThree.setVisibility(View.INVISIBLE);
 			NumberGO.setVisibility(View.INVISIBLE);
-			//game_started = true;
+			game_started = true;
 		}
 
 	}
-	*/
 
 	private void setupClient() {
 
