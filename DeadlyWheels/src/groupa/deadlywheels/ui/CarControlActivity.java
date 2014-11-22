@@ -4,6 +4,7 @@ import groupa.deadlywheels.R;
 import groupa.deadlywheels.carcontrol.DatagramSocketClientGate;
 import groupa.deadlywheels.core.CarDroiDuinoCore;
 import groupa.deadlywheels.utils.SystemProperties;
+
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -16,11 +17,11 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 @SuppressLint("ClickableViewAccessibility")
 public class CarControlActivity extends Activity {
@@ -35,8 +36,10 @@ public class CarControlActivity extends Activity {
 	private CarDroiDuinoCore systemCore;
 
 	private DatagramSocketClientGate socketClientGate;
-	
+
 	public Boolean game_started;
+
+	TextView xAxisValue;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -64,6 +67,8 @@ public class CarControlActivity extends Activity {
 		ImageButton btnLeft = (ImageButton) findViewById(R.id.btnLeft);
 		ImageButton btnRight = (ImageButton) findViewById(R.id.btnRight);
 
+		xAxisValue = (TextView) findViewById(R.id.xAxisValue);
+
 		btnFrente.setOnTouchListener(new View.OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
 				if (game_started) {
@@ -78,7 +83,7 @@ public class CarControlActivity extends Activity {
 			}
 		});
 
-		btnRe.setOnTouchListener(new OnTouchListener() {
+		btnRe.setOnTouchListener(new View.OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -94,7 +99,7 @@ public class CarControlActivity extends Activity {
 			}
 		});
 
-		btnLeft.setOnTouchListener(new OnTouchListener() {
+		btnLeft.setOnTouchListener(new View.OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -109,7 +114,7 @@ public class CarControlActivity extends Activity {
 			}
 		});
 
-		btnRight.setOnTouchListener(new OnTouchListener() {
+		btnRight.setOnTouchListener(new View.OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {

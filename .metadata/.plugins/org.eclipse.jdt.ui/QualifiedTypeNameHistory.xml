@@ -27,7 +27,6 @@
 <fullyQualifiedTypeName name="groupa.deadlywheels.Loadingpairing"/>
 <fullyQualifiedTypeName name="br.usjt.aepn2012.cardroiduino.ui.CarDroidDuinoActivity"/>
 <fullyQualifiedTypeName name="br.usjt.aepn2012.cardroiduino.R"/>
-<fullyQualifiedTypeName name="android.support.v7.app.ActionBarActivity"/>
 <fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="groupa.deadlywheels.carcontrol.DatagramSocketClientGate"/>
 <fullyQualifiedTypeName name="groupa.deadlywheels.core.CarDroiDuinoCore"/>
@@ -55,4 +54,8 @@
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="android.view.View.OnTouchListener"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="android.hardware.SensorEventListener"/>
+<fullyQualifiedTypeName name="android.support.v7.app.ActionBarActivity"/>
 </qualifiedTypeNameHistroy>

@@ -2,7 +2,6 @@ package groupa.deadlywheels.ui;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-//import java.util.Vector;
 
 import groupa.deadlywheels.R;
 import groupa.deadlywheels.carserver.DatagramSocketServerGate;
@@ -110,7 +109,7 @@ public class CarServerActivity extends Activity implements
 	private SensorManager mSensorManager;
 
 	private Sensor mAccelerometer;
-	
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -157,12 +156,13 @@ public class CarServerActivity extends Activity implements
 		// *************************************************
 		// Initialize of the server of the car
 		this.setupServer();
-		
+
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		mAccelerometer = mSensorManager
 				.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		mSensorManager.registerListener(this, mAccelerometer,
 				SensorManager.SENSOR_DELAY_NORMAL);
+
 	}
 
 	/**
@@ -215,7 +215,8 @@ public class CarServerActivity extends Activity implements
 	 * Write handler for messages to Thread graphics System for Visualization by
 	 * the user
 	 */
-	@SuppressLint("HandlerLeak") private Handler mHandler = new Handler() {
+	@SuppressLint("HandlerLeak")
+	private Handler mHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			String txt = mTxtPrompt.getText().toString();
@@ -335,7 +336,8 @@ public class CarServerActivity extends Activity implements
 
 		try {
 			// *************************************************
-			// Informa is Surface Camera Which she will use to show Its // Preview
+			// Informa is Surface Camera Which she will use to show Its //
+			// Preview
 			mCamera.setPreviewDisplay(holder);
 			// *************************************************
 		} catch (IOException e) {
@@ -350,7 +352,8 @@ public class CarServerActivity extends Activity implements
 		// Set Flag to indicate that the camera is running
 		isPreviewRunning = true;
 		// *************************************************
-		// INFORMATION HEREIN WILL RECEIVE THE OBJECT THAT CAPTURED BY THE FRAMES
+		// INFORMATION HEREIN WILL RECEIVE THE OBJECT THAT CAPTURED BY THE
+		// FRAMES
 		// CAMERA
 		// THIS OBJECT IS SET UP SOON
 		mCamera.setPreviewCallback(mPreviewCallBack);
@@ -402,7 +405,7 @@ public class CarServerActivity extends Activity implements
 	@Override
 	public void onAccuracyChanged(Sensor arg0, int arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -418,6 +421,5 @@ public class CarServerActivity extends Activity implements
 		xAxisValue.setText(Float.toString(x));
 		yAxisValue.setText(Float.toString(y));
 		zAxisValue.setText(Float.toString(z));
-		
 	}
 }

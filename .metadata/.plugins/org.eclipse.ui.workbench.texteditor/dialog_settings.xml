@@ -6,29 +6,30 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="http://192.168.100.108" key="selection"/>
+		<item value="192.168.100.108" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="http://192.168.100.107"/>
-			<item value="CONTOUR_COLOR"/>
-			<item value="mIsColorSelected"/>
-			<item value="btn"/>
-			<item value="mScrPrompt"/>
-			<item value="mHandler"/>
-			<item value="mTxtPrompt"/>
-			<item value="start_counter"/>
+			<item value="192.168.100.107"/>
+			<item value="backup"/>
+			<item value="http://192.168.100.108"/>
+			<item value="socket"/>
+			<item value="textView1"/>
+			<item value="textVIew1"/>
+			<item value="textVIew"/>
+			<item value="getLocalIpv4Address"/>
 		</list>
 		<list key="replacehistory">
+			<item value="192.168.100.108"/>
+			<item value="http://192.168.100.107"/>
 			<item value="http://192.168.100.108"/>
 			<item value="bntLight"/>
 			<item value="bntBackward"/>
 			<item value="btnFoward"/>
 			<item value="192.168.100.102"/>
 			<item value=";"/>
-			<item value="groupa.deadlywheels"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

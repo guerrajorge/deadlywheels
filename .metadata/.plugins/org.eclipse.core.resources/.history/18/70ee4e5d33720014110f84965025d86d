@@ -1,0 +1,480 @@
+package groupa.deadlywheels.ui;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
+import java.util.Enumeration;
+
+import groupa.deadlywheels.R;
+import groupa.deadlywheels.carcontrol.DatagramSocketClientGate;
+import groupa.deadlywheels.core.CarDroiDuinoCore;
+import groupa.deadlywheels.utils.SystemProperties;
+import net.learn2develop.socketserver.MainActivity.ServerThread;
+
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.util.InetAddressUtils;
+import org.apache.http.impl.client.DefaultHttpClient;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.StrictMode;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+@SuppressLint("ClickableViewAccessibility")
+public class CarControlActivity extends Activity {
+
+	// Camera's IP address
+	private String serverIPAddress;
+
+	private String clientServerPort;
+
+	private FrameView surfaceView;
+
+	private CarDroiDuinoCore systemCore;
+
+	private DatagramSocketClientGate socketClientGate;
+
+	public Boolean game_started;
+
+	static String SERVER_IP;
+	static final int SERVER_PORT = 5000;
+	Handler handler = new Handler();
+	ServerSocket serverSocket;
+	
+	TextView xAxisValue;
+
+	@SuppressLint("NewApi")
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+				.permitAll().build();
+		StrictMode.setThreadPolicy(policy);
+
+		super.onCreate(savedInstanceState);
+
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+		setContentView(R.layout.control_layout);
+
+		this.serverIPAddress = getIntent().getExtras().getString(
+				SystemProperties.KEY_IP_ADDRESS);
+		this.clientServerPort = getIntent().getExtras().getString(
+				SystemProperties.KEY_PORT_NUMBER);
+
+		ImageButton btnFrente = (ImageButton) findViewById(R.id.btnFrente);
+		ImageButton btnRe = (ImageButton) findViewById(R.id.btnRe);
+		ImageButton btnLeft = (ImageButton) findViewById(R.id.btnLeft);
+		ImageButton btnRight = (ImageButton) findViewById(R.id.btnRight);
+
+		btnFrente.setOnTouchListener(new View.OnTouchListener() {
+			public boolean onTouch(View v, MotionEvent event) {
+				if (game_started) {
+					if (event.getAction() == MotionEvent.ACTION_DOWN)
+						commandArduino("http://192.168.100.108/?forward");
+
+					else if (event.getAction() == MotionEvent.ACTION_UP)
+						commandArduino("http://192.168.100.108/?stop");
+				}
+				return true;
+
+			}
+		});
+
+		btnRe.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (game_started) {
+					if (event.getAction() == MotionEvent.ACTION_DOWN)
+						commandArduino("http://192.168.100.108/?reverse");
+
+					else if (event.getAction() == MotionEvent.ACTION_UP)
+						commandArduino("http://192.168.100.108/?stop");
+				}
+				return true;
+
+			}
+		});
+
+		btnLeft.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN)
+					commandArduino("http://192.168.100.108/?left");
+
+				else if (event.getAction() == MotionEvent.ACTION_UP)
+					commandArduino("http://192.168.100.108/?servo");
+
+				return true;
+
+			}
+		});
+
+		btnRight.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN)
+					commandArduino("http://192.168.100.108/?right");
+
+				else if (event.getAction() == MotionEvent.ACTION_UP)
+					commandArduino("http://192.168.100.108/?servo");
+
+				return true;
+
+			}
+		});
+
+		ImageButton btnLanterna = (ImageButton) findViewById(R.id.btnFarol);
+
+		btnLanterna.setOnTouchListener(new View.OnTouchListener() {
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN)
+					ligarDesligarLanterna();
+
+				return false;
+			}
+		});
+
+		this.surfaceView = (FrameView) findViewById(R.id.surfaceControl);
+
+		this.setupClient();
+
+		/**
+		 * ImageView crackview = (ImageView) findViewById(R.id.crackview);
+		 * crackview.setOnTouchListener(new View.OnTouchListener() { public
+		 * boolean onTouch(View v, MotionEvent event) { MediaPlayer mPlayer =
+		 * MediaPlayer.create(CarControlActivity.this, R.raw.glass);
+		 * mPlayer.start();
+		 * 
+		 * return true;
+		 * 
+		 * } });
+		 */
+
+		start_counter();
+
+		// ---get the IP address of itself---
+		SERVER_IP = getLocalIpv4Address();
+
+		// ---start the server---
+		Thread serverThread = new Thread(new ServerThread());
+		serverThread.start();
+
+	}
+
+	public class ServerThread implements Runnable {
+		public void run() {
+			try {
+				if (SERVER_IP != null) {
+					handler.post(new Runnable() {
+						@Override
+						public void run() {
+							textView1.setText(textView1.getText()
+									+ "Server listening on IP: " + SERVER_IP
+									+ "\n");
+						}
+					});
+
+					// ---create an instance of the server socket---
+					serverSocket = new ServerSocket(SERVER_PORT);
+
+					while (true) {
+						// ---wait for incoming clients---
+						Socket client = serverSocket.accept();
+
+						// ---the above code is a blocking call;
+						// i.e. it will block until a client connects---
+
+						// ---client has connected---
+						handler.post(new Runnable() {
+							@Override
+							public void run() {
+								textView1.setText(textView1.getText()
+										+ "Connected to client." + "\n");
+							}
+						});
+
+						try {
+							// ---get an InputStream object to read from the
+							// socket---
+							BufferedReader br = new BufferedReader(
+									new InputStreamReader(
+											client.getInputStream()));
+
+							OutputStream outputStream = client
+									.getOutputStream();
+
+							// ---read all incoming data terminated with a \n
+							// char---
+							String line = null;
+							while ((line = br.readLine()) != null) {
+								final String strReceived = line;
+
+								// ---send whatever you received back to the
+								// client---
+								String s = line + "\n";
+								outputStream.write(s.getBytes());
+
+								handler.post(new Runnable() {
+									@Override
+									public void run() {
+										textView1.setText(textView1.getText()
+												+ strReceived + "\n");
+									}
+								});
+							}
+
+							// ---client has disconnected from the server---
+							handler.post(new Runnable() {
+								@Override
+								public void run() {
+									textView1.setText(textView1.getText()
+											+ "Client disconnected." + "\n");
+								}
+							});
+
+						} catch (Exception e) {
+							final String error = e.getLocalizedMessage();
+							handler.post(new Runnable() {
+								@Override
+								public void run() {
+									textView1.setText(textView1.getText()
+											+ error);
+								}
+							});
+						}
+					}
+				} else {
+					handler.post(new Runnable() {
+						@Override
+						public void run() {
+							textView1.setText(textView1.getText()
+									+ "No internet connection on device."
+									+ "\n");
+						}
+					});
+				}
+			} catch (Exception e) {
+				final String error = e.getLocalizedMessage();
+				handler.post(new Runnable() {
+					@Override
+					public void run() {
+						textView1.setText(textView1.getText() + error + "\n");
+					}
+				});
+			}
+
+			handler.post(new Runnable() {
+				@Override
+				public void run() {
+					textView1.setText(textView1.getText() + "\n"
+							+ "Server exited" + "\n");
+				}
+			});
+		}
+	}
+
+	// ---get the local IPv4 address---
+	public String getLocalIpv4Address() {
+		try {
+			for (Enumeration<NetworkInterface> networkInterfaceEnum = NetworkInterface
+					.getNetworkInterfaces(); networkInterfaceEnum
+					.hasMoreElements();) {
+				NetworkInterface networkInterface = networkInterfaceEnum
+						.nextElement();
+				for (Enumeration<InetAddress> ipAddressEnum = networkInterface
+						.getInetAddresses(); ipAddressEnum.hasMoreElements();) {
+					InetAddress inetAddress = (InetAddress) ipAddressEnum
+							.nextElement();
+					// ---check that it is not a loopback address and
+					// it is IPv4---
+					if (!inetAddress.isLoopbackAddress()
+							&& InetAddressUtils.isIPv4Address(inetAddress
+									.getHostAddress())) {
+						return inetAddress.getHostAddress();
+					}
+				}
+			}
+		} catch (SocketException ex) {
+			Log.e("IPAddress", ex.toString());
+		}
+		return null;
+	}
+
+	private void start_counter() {
+		final Handler handler = new Handler();
+
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				int interval = 3;
+				// Do something after 5s = 5000ms
+				start_countdown(interval);
+			}
+		}, 1000);
+
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				int interval = 2;
+				// Do something after 5s = 5000ms
+				start_countdown(interval);
+			}
+		}, 2500);
+
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				int interval = 1;
+				// Do something after 5s = 5000ms
+				start_countdown(interval);
+			}
+		}, 4000);
+
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				int interval = 0;
+				// Do something after 5s = 5000ms
+				start_countdown(interval);
+			}
+		}, 5500);
+
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				int interval = 6;
+				// Do something after 5s = 5000ms
+				start_countdown(interval);
+			}
+		}, 6000);
+
+	}
+
+	private void start_countdown(int interval) {
+
+		ImageView NumberOne = (ImageView) findViewById(R.id.numberone);
+		ImageView NumberTwo = (ImageView) findViewById(R.id.numbertwo);
+		ImageView NumberThree = (ImageView) findViewById(R.id.numberthree);
+		ImageView NumberGO = (ImageView) findViewById(R.id.numbergo);
+
+		if (interval == 3) {
+			game_started = false;
+			NumberOne.setVisibility(View.INVISIBLE);
+			NumberTwo.setVisibility(View.INVISIBLE);
+			NumberThree.setVisibility(View.VISIBLE);
+			NumberGO.setVisibility(View.INVISIBLE);
+
+			MediaPlayer mPlayer = MediaPlayer.create(CarControlActivity.this,
+					R.raw.beep);
+			mPlayer.start();
+		}
+
+		else if (interval == 2) {
+			NumberOne.setVisibility(View.INVISIBLE);
+			NumberTwo.setVisibility(View.VISIBLE);
+			NumberThree.setVisibility(View.INVISIBLE);
+			NumberGO.setVisibility(View.INVISIBLE);
+			MediaPlayer mPlayer = MediaPlayer.create(CarControlActivity.this,
+					R.raw.beep);
+			mPlayer.start();
+		}
+
+		else if (interval == 1) {
+			NumberOne.setVisibility(View.VISIBLE);
+			NumberTwo.setVisibility(View.INVISIBLE);
+			NumberThree.setVisibility(View.INVISIBLE);
+			NumberGO.setVisibility(View.INVISIBLE);
+			MediaPlayer mPlayer = MediaPlayer.create(CarControlActivity.this,
+					R.raw.beep);
+			mPlayer.start();
+		}
+
+		else if (interval == 0) {
+			NumberOne.setVisibility(View.INVISIBLE);
+			NumberTwo.setVisibility(View.INVISIBLE);
+			NumberThree.setVisibility(View.INVISIBLE);
+			NumberGO.setVisibility(View.VISIBLE);
+		}
+
+		else if (interval == 6) {
+			NumberOne.setVisibility(View.INVISIBLE);
+			NumberTwo.setVisibility(View.INVISIBLE);
+			NumberThree.setVisibility(View.INVISIBLE);
+			NumberGO.setVisibility(View.INVISIBLE);
+			game_started = true;
+		}
+
+	}
+
+	private void setupClient() {
+
+		this.systemCore = new CarDroiDuinoCore();
+		try {
+
+			this.socketClientGate = new DatagramSocketClientGate(
+					this.systemCore, this.serverIPAddress,
+					Integer.parseInt(this.clientServerPort));
+
+			this.surfaceView.startImageDrawer(this.systemCore);
+
+		} catch (Exception e) {
+			new AlertDialog.Builder(this).setMessage(e.getMessage()).show();
+		}
+	}
+
+	public void commandArduino(String url) {
+		try {
+			HttpClient httpclient = new DefaultHttpClient();
+			httpclient.execute(new HttpGet(url));
+		} catch (Exception e) {
+		}
+	}
+
+	private void enviarComandoCarrinho(String comando) {
+		if (this.systemCore != null)
+			this.systemCore.addDataToCarControlQueue(comando.getBytes());
+	}
+
+	private void ligarDesligarLanterna() {
+		this.enviarComandoCarrinho(SystemProperties.COMANDO_LANTERNA_SERVER);
+	}
+
+	private void killGates() {
+		this.socketClientGate.turnOff();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		this.killGates();
+	}
+
+	public void cracksound() {
+		MediaPlayer mPlayer = MediaPlayer.create(CarControlActivity.this,
+				R.raw.glass);
+		mPlayer.start();
+	}
+}
