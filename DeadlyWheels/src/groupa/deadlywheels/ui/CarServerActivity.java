@@ -1,21 +1,14 @@
 package groupa.deadlywheels.ui;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+//import java.util.Vector;
+
 import groupa.deadlywheels.R;
 import groupa.deadlywheels.carserver.DatagramSocketServerGate;
 import groupa.deadlywheels.carserver.InternalCommandServerGate;
 import groupa.deadlywheels.core.CarDroiDuinoCore;
 import groupa.deadlywheels.utils.SystemProperties;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.Socket;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -31,14 +24,12 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
-//import java.util.Vector;
 
 /**
  * <p>
@@ -52,19 +43,8 @@ import android.widget.TextView;
  * </p>
  * 
  */
-public class CarServerActivity extends Activity implements SurfaceHolder.Callback, SensorEventListener {
-	
-	 static String serverIP = "192.168.100.103";
-	 static int serverPort = 5000;
-	
-	Handler handler = new Handler();
-	
-	PrintWriter printWriter;
-	
-	TextView textView2;
-	EditText editText2;
-	
-	static Socket socket;
+public class CarServerActivity extends Activity implements
+		SurfaceHolder.Callback, SensorEventListener {
 
 	/**
 	 * IP Address of Remote Control Car
@@ -134,8 +114,6 @@ public class CarServerActivity extends Activity implements SurfaceHolder.Callbac
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		
-		
 
 		// *************************************************
 		// Performs first the method inherited class (Upper class -
@@ -150,9 +128,6 @@ public class CarServerActivity extends Activity implements SurfaceHolder.Callbac
 		// Which by setting the Layout ( XML ) Activity associated with this - >
 		// CarDroiDuino \ res \ layout
 		setContentView(R.layout.car_layout);
-		textView2 = (TextView) findViewById(R.id.textView2);
-		editText2 = (EditText) findViewById(R.id.editText2);
-		textView2.setMovementMethod(new ScrollingMovementMethod());
 
 		// *************************************************
 		// Getting to the port available for connection and the MAC Address of
@@ -444,112 +419,5 @@ public class CarServerActivity extends Activity implements SurfaceHolder.Callbac
 		yAxisValue.setText(Float.toString(y));
 		zAxisValue.setText(Float.toString(z));
 		
-	}
-	
-	@Override
-	protected void onStart() {
-		super.onStart();
-		Thread clientThread = new Thread(new ClientThread());
-		clientThread.start();
-	}
-	
-	@Override
-	protected void onStop() {
-		super.onStop();
-		try {
-			socket.shutdownInput();
-			socket.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public class ClientThread implements Runnable {
-
-		public void run() {
-			try {
-				InetAddress serverAddr = InetAddress.getByName(serverIP);
-
-				handler.post(new Runnable() {
-					@Override
-					public void run() {
-						textView2.setText(textView2.getText()
-								+ "Connecting to the server");
-					}
-				});
-
-				socket = new Socket(serverAddr, serverPort);				
-				try {
-					printWriter = new PrintWriter(new BufferedWriter(
-							new OutputStreamWriter(socket.getOutputStream())),
-							true);
-
-					//---get an InputStream object to read from the server---
-					BufferedReader br = new BufferedReader(
-							new InputStreamReader(socket.getInputStream()));
-
-					try {
-						//---read all incoming data terminated with a \n
-						// char---
-						String line = null;
-						while ((line = br.readLine()) != null) {
-							final String strReceived = line;
-
-							handler.post(new Runnable() {
-								@Override
-								public void run() {
-									textView2.setText(textView2.getText()
-											+ "\n" + strReceived);
-								}
-							});
-						}
-
-						//---disconnected from the server---
-						handler.post(new Runnable() {
-							@Override
-							public void run() {
-								textView2.setText(textView2.getText()
-										+ "\n" + "Client disconnected");
-							}
-						});
-
-					} catch (Exception e) {
-						final String error = e.getLocalizedMessage();
-						handler.post(new Runnable() {
-							@Override
-							public void run() {
-								textView2.setText(textView2.getText() + "\n" + error);
-							}
-						});
-					}
-
-				} catch (Exception e) {
-					final String error = e.getLocalizedMessage();
-					handler.post(new Runnable() {
-						@Override
-						public void run() {
-							textView2.setText(textView2.getText() + "\n" + error);
-						}
-					});
-				}
-
-				handler.post(new Runnable() {
-					@Override
-					public void run() {
-						textView2.setText(textView2.getText()
-								+ "\n" + "Connection closed.");
-					}
-				});
-
-			} catch (Exception e) {
-				final String error = e.getLocalizedMessage();
-				handler.post(new Runnable() {
-					@Override
-					public void run() {
-						textView2.setText(textView2.getText() + "\n" + error);
-					}
-				});
-			}
-		}
 	}
 }
