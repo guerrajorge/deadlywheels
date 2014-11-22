@@ -16,18 +16,18 @@
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:clickable="false"
             android:contentDescription="@string/btnFrente"
-            android:src="@drawable/up_arrow" />
+            android:src="@drawable/up_arrow"
+            android:clickable="false" />
 
         <ImageButton
             android:id="@+id/btnRe"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:clickable="false"
             android:contentDescription="@string/btnRe"
-            android:src="@drawable/down_arrow" />
+            android:src="@drawable/down_arrow"
+            android:clickable="false" />
     </LinearLayout>
 
     <RelativeLayout
@@ -158,7 +158,7 @@
             android:text="@string/XAxis"
             android:textColor="#FFAA66CC"
             android:textSize="15sp" />
-
+        
         <TextView
             android:id="@+id/xAxisValue"
             android:layout_width="wrap_content"
@@ -179,7 +179,7 @@
             android:text="@string/ZAxis"
             android:textColor="#FFAA66CC"
             android:textSize="15sp" />
-
+        
         <TextView
             android:id="@+id/zAxisValue"
             android:layout_width="wrap_content"
@@ -192,14 +192,14 @@
 
         <ImageButton
             android:id="@+id/btnLeft"
+            android:layout_marginTop="100dp"
             android:layout_width="60dp"
             android:layout_height="130dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="100dp"
-            android:clickable="false"
             android:contentDescription="@string/btnMarchaAumenta"
-            android:src="@drawable/left_arrow" />
+            android:src="@drawable/left_arrow"/>
+
     </RelativeLayout>
 
     <LinearLayout
@@ -208,23 +208,21 @@
         android:orientation="vertical" >
 
         <ImageButton
+            android:layout_marginTop="100dp"
             android:id="@+id/btnRight"
             android:layout_width="60dp"
             android:layout_height="200dp"
-            android:layout_marginTop="100dp"
             android:layout_weight="2"
-            android:clickable="false"
             android:contentDescription="@string/btnMarchaReduz"
-            android:src="@drawable/right_arrow" />
+            android:src="@drawable/right_arrow"/>
 
         <ImageButton
             android:id="@+id/btnFarol"
             android:layout_width="60dp"
             android:layout_height="200dp"
             android:layout_weight="2"
-            android:clickable="false"
             android:contentDescription="@string/btnFarol"
-            android:src="@drawable/ic_flashlight" />
+            android:src="@drawable/ic_flashlight"/>
     </LinearLayout>
 
 </LinearLayout>

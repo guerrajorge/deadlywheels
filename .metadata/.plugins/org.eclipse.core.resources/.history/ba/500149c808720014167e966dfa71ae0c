@@ -10,6 +10,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,9 +26,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 @SuppressLint("ClickableViewAccessibility")
-public class CarControlActivity extends Activity {
+public class CarControlActivity extends Activity implements SensorEventListener {
 
 	// Camera's IP address
 	private String serverIPAddress;
@@ -35,7 +41,11 @@ public class CarControlActivity extends Activity {
 	private CarDroiDuinoCore systemCore;
 
 	private DatagramSocketClientGate socketClientGate;
-	
+
+	private SensorManager mSensorManager;
+
+	private Sensor mAccelerometer;
+
 	public Boolean game_started;
 
 	@SuppressLint("NewApi")
@@ -68,10 +78,10 @@ public class CarControlActivity extends Activity {
 			public boolean onTouch(View v, MotionEvent event) {
 				if (game_started) {
 					if (event.getAction() == MotionEvent.ACTION_DOWN)
-						commandArduino("http://192.168.100.108/?forward");
+						commandArduino("http://192.168.100.107/?forward");
 
 					else if (event.getAction() == MotionEvent.ACTION_UP)
-						commandArduino("http://192.168.100.108/?stop");
+						commandArduino("http://192.168.100.107/?stop");
 				}
 				return true;
 
@@ -84,10 +94,10 @@ public class CarControlActivity extends Activity {
 			public boolean onTouch(View v, MotionEvent event) {
 				if (game_started) {
 					if (event.getAction() == MotionEvent.ACTION_DOWN)
-						commandArduino("http://192.168.100.108/?reverse");
+						commandArduino("http://192.168.100.107/?reverse");
 
 					else if (event.getAction() == MotionEvent.ACTION_UP)
-						commandArduino("http://192.168.100.108/?stop");
+						commandArduino("http://192.168.100.107/?stop");
 				}
 				return true;
 
@@ -99,10 +109,10 @@ public class CarControlActivity extends Activity {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.108/?left");
+					commandArduino("http://192.168.100.107/?left");
 
 				else if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.108/?servo");
+					commandArduino("http://192.168.100.107/?servo");
 
 				return true;
 
@@ -114,10 +124,10 @@ public class CarControlActivity extends Activity {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.108/?right");
+					commandArduino("http://192.168.100.107/?right");
 
 				else if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.108/?servo");
+					commandArduino("http://192.168.100.107/?servo");
 
 				return true;
 
@@ -152,6 +162,12 @@ public class CarControlActivity extends Activity {
 		 */
 
 		start_counter();
+
+		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+		mAccelerometer = mSensorManager
+				.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		mSensorManager.registerListener(this, mAccelerometer,
+				SensorManager.SENSOR_DELAY_NORMAL);
 
 	}
 
@@ -309,4 +325,38 @@ public class CarControlActivity extends Activity {
 				R.raw.glass);
 		mPlayer.start();
 	}
+
+	@Override
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+	}
+
+	@SuppressLint("FloatMath")
+	public void onSensorChanged(SensorEvent event) {
+
+		TextView xAxisValue = (TextView) findViewById(R.id.xAxisValue);
+		TextView yAxisValue = (TextView) findViewById(R.id.yAxisValue);
+		TextView zAxisValue = (TextView) findViewById(R.id.zAxisValue);
+
+		float x = event.values[0];
+		float y = event.values[1];
+		float z = event.values[2];
+
+		xAxisValue.setText(Float.toString(x));
+		yAxisValue.setText(Float.toString(y));
+		zAxisValue.setText(Float.toString(z));
+
+		if (y < -.5) {
+			yAxisValue.setText("left");
+			commandArduino("http://192.168.100.107/?left");
+		} else if (y > .5) {
+			yAxisValue.setText("right");
+			commandArduino("http://192.168.100.107/?right");
+		} else{
+			yAxisValue.setText("middle");
+			commandArduino("http://192.168.100.107/?servo");
+			
+		}
+		zAxisValue.setText(Float.toString(z));
+	}
+
 }
