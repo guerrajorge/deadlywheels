@@ -197,8 +197,9 @@
             android:layout_height="130dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:layout_weight="2"
             android:contentDescription="@string/btnMarchaAumenta"
-            android:src="@drawable/left_arrow"/>
+            android:src="@drawable/left_arrow" />
 
     </RelativeLayout>
 

@@ -1,7 +1,0 @@
-package groupa.deadlywheels.ui;
-
-import android.app.Activity;
-
-public class finishline extends Activity{
-
-}

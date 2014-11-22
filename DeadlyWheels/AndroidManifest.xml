@@ -46,7 +46,7 @@
         </activity>
         
         <activity
-            android:name=".ui.finishline"
+            android:name=".ui.Referee"
             android:configChanges="orientation"
             android:screenOrientation="landscape" >
         </activity>

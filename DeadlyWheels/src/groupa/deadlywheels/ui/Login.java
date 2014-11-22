@@ -17,13 +17,6 @@ import android.view.WindowManager;
         Intent intent = new Intent(this, CarDroidDuinoActivity.class);
         startActivity(intent);
     }
-    
-    /** Called when the user clicks on the single player mode */
-    public void gotofinishline(View view){
-        // Do something in response to the touched image
-        Intent intent = new Intent(this, finishline.class);
-        startActivity(intent);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
