@@ -44,13 +44,6 @@
             android:configChanges="orientation"
             android:screenOrientation="landscape" >
         </activity>
-        
-        <activity
-            android:name=".ui.Referee"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape" >
-        </activity>
-        
         <activity
             android:name=".ui.CarControlActivity"
             android:configChanges="orientation"

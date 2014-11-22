@@ -42,9 +42,15 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 
 	private DatagramSocketClientGate socketClientGate;
 
+	private float mLastX, mLastY, mLastZ;
+
+	private boolean mInitialized;
+
 	private SensorManager mSensorManager;
 
 	private Sensor mAccelerometer;
+
+	private final float NOISE = (float) 1.0;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -74,54 +80,54 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		btnFrente.setOnTouchListener(new View.OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.107/?forward");
+					commandArduino("http://192.168.100.102/?forward");
 
 				else if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.107/?stop");
+					commandArduino("http://192.168.100.102/?stop");
 
 				return true;
 
 			}
 		});
 
-		btnRe.setOnTouchListener(new View.OnTouchListener() {
+		btnRe.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.107/?reverse");
+					commandArduino("http://192.168.100.102/?reverse");
 
 				else if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.107/?stop");
+					commandArduino("http://192.168.100.102/?stop");
 
 				return true;
 
 			}
 		});
 
-		btnRe.setOnTouchListener(new View.OnTouchListener() {
+		btnRe.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.107/?reverse");
+					commandArduino("http://192.168.100.102/?reverse");
 
 				else if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.107/?stop");
+					commandArduino("http://192.168.100.102/?stop");
 
 				return true;
 			}
 		});
 
-		btnLeft.setOnTouchListener(new View.OnTouchListener() {
+		btnLeft.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.107/?left");
+					commandArduino("http://192.168.100.102/?left");
 
 				else if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.107/?servo");
+					commandArduino("http://192.168.100.102/?servo");
 
 				return true;
 
@@ -133,10 +139,10 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.107/?right");
+					commandArduino("http://192.168.100.102/?right");
 
 				else if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.107/?servo");
+					commandArduino("http://192.168.100.102/?servo");
 
 				return true;
 
@@ -362,21 +368,31 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 		float x = event.values[0];
 		float y = event.values[1];
 		float z = event.values[2];
+		if (!mInitialized) {
+			mLastX = x;
+			mLastY = y;
+			mLastZ = z;
+			mInitialized = true;
+		} else {
+			float deltaX = Math.abs(mLastX - x);
+			float deltaY = Math.abs(mLastY - y);
+			float deltaZ = Math.abs(mLastZ - z);
+			if (deltaX < NOISE)
+				deltaX = (float) 0.0;
+			if (deltaY < NOISE)
+				deltaY = (float) 0.0;
+			if (deltaZ < NOISE)
+				deltaZ = (float) 0.0;
 
-		xAxisValue.setText(Float.toString(x));
-		yAxisValue.setText(Float.toString(y));
-		zAxisValue.setText(Float.toString(z));
+			mLastX = x;
+			mLastY = y;
+			mLastZ = z;
 
-		/*
-		 * if (y > -2) { yAxisValue.setText("right");
-		 * commandArduino("http://192.168.100.102/?right"); } else if (y < 2) {
-		 * yAxisValue.setText("left");
-		 * commandArduino("http://192.168.100.102/?left"); } else {
-		 * yAxisValue.setText("servo");
-		 * commandArduino("http://192.168.100.102/?servo"); }
-		 * zAxisValue.setText(Float.toString(z));
-		 */
+			xAxisValue.setText(Float.toString(deltaX));
+			yAxisValue.setText(Float.toString(deltaY));
+			zAxisValue.setText(Float.toString(deltaZ));
 
+		}
 	}
 
 }

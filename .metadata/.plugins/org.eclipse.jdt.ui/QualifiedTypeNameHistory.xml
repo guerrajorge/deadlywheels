@@ -43,16 +43,15 @@
 <fullyQualifiedTypeName name="android.view.View"/>
 <fullyQualifiedTypeName name="android.os.Handler"/>
 <fullyQualifiedTypeName name="android.util.FloatMath"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="android.content.ServiceConnection"/>
 <fullyQualifiedTypeName name="groupa.deadlywheels.utils.MusicService"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="android.preference.PreferenceManager"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="java.util.Collection"/>
 <fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="groupa.deadlywheels.R"/>
 <fullyQualifiedTypeName name="android.media.MediaPlayer"/>
 <fullyQualifiedTypeName name="groupa.deadlywheels.R.raw"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
-<fullyQualifiedTypeName name="android.view.View.OnTouchListener"/>
 </qualifiedTypeNameHistroy>

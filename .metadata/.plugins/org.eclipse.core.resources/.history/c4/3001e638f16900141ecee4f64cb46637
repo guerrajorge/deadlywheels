@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:keepScreenOn="true"
+    android:orientation="horizontal" >
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+        
+        <ImageButton
+        android:id="@+id/btnFrente"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:contentDescription="@string/btnFrente"
+        android:src="@drawable/up_arrow" />
+        
+        <ImageButton
+        android:id="@+id/btnRe"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:contentDescription="@string/btnRe"
+        android:src="@drawable/down_arrow" />
+        
+    </LinearLayout>
+    
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+        
+        <groupa.deadlywheels.ui.FrameView
+        android:id="@+id/surfaceControl"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:onClick="cracksound" />
+        
+        <TextView
+        android:id="@+id/textView1"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:scrollbars="vertical" />
+        
+        
+        <TextView
+        android:id="@+id/TotalScoreLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/TotalScore"
+        android:textColor="#FFAA66CC"
+        android:textSize="30sp" />
+        
+        <TextView
+        android:id="@+id/HitsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TotalScoreLabel"
+        android:layout_below="@+id/TotalScoreLabel"
+        android:text="@string/Hits"
+        android:textColor="#FFAA66CC"
+        android:textSize="30sp" />
+        
+        <TextView
+        android:id="@+id/x_axis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/TotalScoreLabel"
+        android:layout_below="@+id/TotalScoreLabel"
+        android:text="@string/X-Axis"
+        android:textColor="#FFAA66CC"
+        android:textSize="30sp"/>
+        
+        <ImageView
+        android:id="@+id/crackview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/crack"
+        android:onClick="gotoLogin"
+        android:scaleType="fitXY"
+        android:src="@raw/crack"
+        android:visibility = "gone"/>
+        
+        <ImageView
+        android:id="@+id/numberone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/one"
+        android:onClick="gotoLogin"
+        android:scaleType="fitXY"
+        android:src="@raw/one"
+        android:visibility = "gone"/>
+        
+        <ImageView
+        android:id="@+id/numbertwo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/two"
+        android:onClick="gotoLogin"
+        android:scaleType="fitXY"
+        android:src="@raw/two"
+        android:visibility = "gone"/>
+        
+        <ImageView
+        android:id="@+id/numberthree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/three"
+        android:onClick="gotoLogin"
+        android:scaleType="fitXY"
+        android:src="@raw/three"
+        android:visibility = "gone" />
+        
+        <ImageView
+        android:id="@+id/numbergo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/go"
+        android:onClick="gotoLogin"
+        android:scaleType="fitXY"
+        android:src="@raw/go"
+        android:visibility="gone"/>
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+        
+        <ImageButton
+        android:id="@+id/btnRight"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:contentDescription="@string/btnMarchaReduz"
+        android:src="@drawable/right_arrow" />
+        
+        <ImageButton
+        android:id="@+id/btnLeft"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:contentDescription="@string/btnMarchaAumenta"
+        android:src="@drawable/left_arrow" />
+        
+        
+        
+        <ImageButton
+        android:id="@+id/btnFarol"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:contentDescription="@string/btnFarol"
+        android:src="@drawable/ic_flashlight" />
+    </LinearLayout>
+    
+</LinearLayout>
