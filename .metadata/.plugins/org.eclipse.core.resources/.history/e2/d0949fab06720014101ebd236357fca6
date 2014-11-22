@@ -126,7 +126,7 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
 					commandArduino("http://192.168.100.108/?right");
 
-				if (event.getAction() == MotionEvent.ACTION_UP)
+				else if (event.getAction() == MotionEvent.ACTION_UP)
 					commandArduino("http://192.168.100.108/?servo");
 
 				return true;

@@ -78,56 +78,56 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 			public boolean onTouch(View v, MotionEvent event) {
 				if (game_started) {
 					if (event.getAction() == MotionEvent.ACTION_DOWN)
-						commandArduino("http://192.168.100.108/?forward");
+						commandArduino("http://192.168.100.107/?forward");
 
 					else if (event.getAction() == MotionEvent.ACTION_UP)
-						commandArduino("http://192.168.100.108/?stop");
+						commandArduino("http://192.168.100.107/?stop");
 				}
 				return true;
 
 			}
 		});
 
-		btnRe.setOnTouchListener(new View.OnTouchListener() {
+		btnRe.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (game_started) {
 					if (event.getAction() == MotionEvent.ACTION_DOWN)
-						commandArduino("http://192.168.100.108/?reverse");
+						commandArduino("http://192.168.100.107/?reverse");
 
 					else if (event.getAction() == MotionEvent.ACTION_UP)
-						commandArduino("http://192.168.100.108/?stop");
+						commandArduino("http://192.168.100.107/?stop");
 				}
 				return true;
 
 			}
 		});
 
-		btnLeft.setOnTouchListener(new View.OnTouchListener() {
+		btnLeft.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.108/?left");
+					commandArduino("http://192.168.100.107/?left");
 
-				if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.108/?servo");
+				else if (event.getAction() == MotionEvent.ACTION_UP)
+					commandArduino("http://192.168.100.107/?servo");
 
 				return true;
 
 			}
 		});
 
-		btnRight.setOnTouchListener(new View.OnTouchListener() {
+		btnRight.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.108/?right");
+					commandArduino("http://192.168.100.107/?right");
 
-				if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.108/?servo");
+				else if (event.getAction() == MotionEvent.ACTION_UP)
+					commandArduino("http://192.168.100.107/?servo");
 
 				return true;
 
@@ -163,14 +163,11 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 
 		start_counter();
 
-		/*
-		 * 
-		 * mSensorManager = (SensorManager)
-		 * getSystemService(Context.SENSOR_SERVICE); mAccelerometer =
-		 * mSensorManager .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-		 * mSensorManager.registerListener(this, mAccelerometer,
-		 * SensorManager.SENSOR_DELAY_NORMAL);
-		 */
+		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+		mAccelerometer = mSensorManager
+				.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		mSensorManager.registerListener(this, mAccelerometer,
+				SensorManager.SENSOR_DELAY_NORMAL);
 
 	}
 
@@ -350,13 +347,13 @@ public class CarControlActivity extends Activity implements SensorEventListener 
 
 		if (y > -2) {
 			yAxisValue.setText("right");
-			commandArduino("http://192.168.100.108/?right");
+			commandArduino("http://192.168.100.107/?right");
 		} else if (y < 2) {
 			yAxisValue.setText("left");
-			commandArduino("http://192.168.100.108/?left");
+			commandArduino("http://192.168.100.107/?left");
 		} else {
 			yAxisValue.setText("servo");
-			commandArduino("http://192.168.100.108/?servo");
+			commandArduino("http://192.168.100.107/?servo");
 		}
 		zAxisValue.setText(Float.toString(z));
 	}
