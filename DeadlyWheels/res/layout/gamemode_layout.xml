@@ -29,13 +29,13 @@
         android:text="@string/multimode" />
 
     <Button
-        android:id="@+id/btnfinishline"
+        android:id="@+id/finishlinebutton"
         android:layout_width="200sp"
         android:layout_height="50sp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="49dp"
-        android:onClick="gotofinishline"
+        android:layout_marginBottom="44dp"
+        android:onClick="gotofinishlineActivity"
         android:text="@string/finishline" />
 
 </RelativeLayout>

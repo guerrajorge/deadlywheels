@@ -37,6 +37,7 @@ syntaxColoring.xml.processingInstruction.color=216,216,216
 syntaxColoring.xml.tagDelimiter.color=216,216,216
 syntaxColoring.xml.tagName.color=216,216,216
 syntaxColouring.bracket.colour=216,216,216
+syntaxColouring.character.colour=255,198,0
 syntaxColouring.default.colour=216,216,216
 syntaxColouring.keyword.colour=255,255,255
 syntaxColouring.multiLineComment.colour=199,221,12

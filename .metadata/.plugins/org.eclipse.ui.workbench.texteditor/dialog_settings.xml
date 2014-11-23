@@ -1,42 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
-		<item value="484" key="DIALOG_X_ORIGIN"/>
-		<item value="339" key="DIALOG_Y_ORIGIN"/>
-	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.color_blob_detection_activity_surface_view);&#x0A;&#x09;&#x09;mOpenCvCameraView.setCvCameraViewListener(this);" key="selection"/>
+		<item value="Core" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.color_blob_detection_activity_surface_view);&#x0A;&#x09;&#x09;mOpenCvCameraView.setCvCameraViewListener(this);"/>
-			<item value="oncreate"/>
+			<item value="Core"/>
+			<item value="onCameraFrame"/>
 			<item value="getColorName"/>
-			<item value="ColorBlobDetector"/>
-			<item value="mDetector"/>
-			<item value="Handler"/>
-			<item value="commandArduino"/>
-			<item value="command"/>
 		</list>
 		<list key="replacehistory">
-			<item value="192.168.100.108"/>
-			<item value="http://192.168.100.107"/>
-			<item value="http://192.168.100.108"/>
-			<item value="bntLight"/>
-			<item value="bntBackward"/>
-			<item value="btnFoward"/>
-			<item value="192.168.100.102"/>
-			<item value=";"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="265" key="DIALOG_WIDTH"/>
 		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
 		<item value="399" key="DIALOG_HEIGHT"/>
-		<item value="1042" key="DIALOG_X_ORIGIN"/>
-		<item value="165" key="DIALOG_Y_ORIGIN"/>
+		<item value="884" key="DIALOG_X_ORIGIN"/>
+		<item value="178" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

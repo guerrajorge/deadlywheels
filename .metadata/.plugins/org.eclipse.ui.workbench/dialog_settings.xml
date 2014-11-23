@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="WorkbenchPreferenceDialogSettings">
-		<item value="28" key="DIALOG_Y_ORIGIN"/>
 		<item value="203" key="DIALOG_X_ORIGIN"/>
+		<item value="28" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">
 		<item value="563" key="dialogHeight"/>
@@ -19,19 +19,7 @@
 	<section name="ImportExportAction">
 		<item value="com.android.ide.eclipse.adt.project.ImportProjectWizard" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
-			<item value="org.eclipse.ui.Basic"/>
 			<item value="com.android.ide.eclipse.wizards.category"/>
-		</list>
-	</section>
-	<section name="ShowViewDialog">
-		<item value="307" key="DIALOG_WIDTH"/>
-		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
-		<item value="com.android.ide.eclipse.ddms.views.OldLogCatView" key="ShowViewDialog.STORE_SELECTED_VIEW_ID"/>
-		<item value="415" key="DIALOG_HEIGHT"/>
-		<item value="567" key="DIALOG_X_ORIGIN"/>
-		<item value="174" key="DIALOG_Y_ORIGIN"/>
-		<list key="ShowViewDialog.STORE_EXPANDED_CATEGORIES_ID">
-			<item value="com.android.ide.eclipse.ddms.views.category"/>
 		</list>
 	</section>
 </section>

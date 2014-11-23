@@ -19,10 +19,10 @@ import android.view.WindowManager;
     }
     
     /** Called when the user clicks on the single player mode */
-    public void gotofinishline(View view){
+    public void gotofinishlineActivity(View view){
         // Do something in response to the touched image
-        //Intent intent = new Intent(this, finishline.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, OpenCVMainActivity.class);
+        startActivity(intent);
     }
 
     @Override

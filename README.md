@@ -1,4 +1,0 @@
-deadlywheels
-============
-
-Senior Design Project
