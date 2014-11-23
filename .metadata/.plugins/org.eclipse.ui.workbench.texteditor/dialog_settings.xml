@@ -6,20 +6,20 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="192.168.100.108" key="selection"/>
+		<item value="handler" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="192.168.100.107"/>
-			<item value="backup"/>
-			<item value="http://192.168.100.108"/>
-			<item value="socket"/>
-			<item value="textView1"/>
-			<item value="textVIew1"/>
-			<item value="textVIew"/>
-			<item value="getLocalIpv4Address"/>
+			<item value="Handler"/>
+			<item value="oncreate"/>
+			<item value="commandArduino"/>
+			<item value="command"/>
+			<item value="onCreate"/>
+			<item value="setupClient"/>
+			<item value="ImageBut"/>
+			<item value="imageBut"/>
 		</list>
 		<list key="replacehistory">
 			<item value="192.168.100.108"/>
