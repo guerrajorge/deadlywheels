@@ -80,10 +80,10 @@ public class CarControlActivity extends Activity{
 			public boolean onTouch(View v, MotionEvent event) {
 				if (game_started) {
 					if (event.getAction() == MotionEvent.ACTION_DOWN)
-						commandArduino("http://192.168.100.108/?forward");
+						commandArduino("http://192.168.100.107/?forward");
 
 					else if (event.getAction() == MotionEvent.ACTION_UP)
-						commandArduino("http://192.168.100.108/?stop");
+						commandArduino("http://192.168.100.107/?stop");
 				}
 				return true;
 
@@ -95,10 +95,10 @@ public class CarControlActivity extends Activity{
 			public boolean onTouch(View v, MotionEvent event) {
 				if (game_started) {
 					if (event.getAction() == MotionEvent.ACTION_DOWN)
-						commandArduino("http://192.168.100.108/?reverse");
+						commandArduino("http://192.168.100.107/?reverse");
 
 					else if (event.getAction() == MotionEvent.ACTION_UP)
-						commandArduino("http://192.168.100.108/?stop");
+						commandArduino("http://192.168.100.107/?stop");
 				}
 				return true;
 			}
@@ -109,10 +109,10 @@ public class CarControlActivity extends Activity{
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.108/?left");
+					commandArduino("http://192.168.100.107/?left");
 
 				else if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.108/?servo");
+					commandArduino("http://192.168.100.107/?servo");
 
 				return true;
 
@@ -124,10 +124,10 @@ public class CarControlActivity extends Activity{
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.108/?right");
+					commandArduino("http://192.168.100.107/?right");
 
 				else if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.108/?servo");
+					commandArduino("http://192.168.100.107/?servo");
 
 				return true;
 

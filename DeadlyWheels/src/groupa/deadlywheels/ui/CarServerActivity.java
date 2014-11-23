@@ -34,18 +34,7 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-/**
- * <p>
- * <b>Description:</b> <br>
- * <p>
- * Screen System Server module -Screen to be performed on the device coupled to
- * cart to be controlled It features : -Interface with camera Android Device
- * -Connected Socket For Receiving and Sending Data to the Client (Remote
- * Control) -Bluetooth Interface with Arduino Controlled Car -Resolver
- * initialization of Internal Controls
- * </p>
- * 
- */
+
 public class CarServerActivity extends Activity implements
 		SurfaceHolder.Callback, SensorEventListener {
 
@@ -457,7 +446,7 @@ public class CarServerActivity extends Activity implements
 
 		}
 
-		if (Math.abs(lasty - y) > 3) {
+		if (y > 3) 
 
 			// for debugging purposes
 			System.out.println("y :" + y);
@@ -465,11 +454,11 @@ public class CarServerActivity extends Activity implements
 			Log.d("Y Value", Float.toString(y));
 
 			// car has been hit
-			commandArduino("http://192.168.100.108/hit");
+			commandArduino("http://192.168.100.107/hit");
 
-		}
+		
 
-		if (Math.abs(lastz - z) > 3) {
+		/*if (Math.abs(lastz - z) > 3) {
 
 			// for debugging purposes
 			System.out.println("z :" + z);
@@ -477,8 +466,8 @@ public class CarServerActivity extends Activity implements
 			Log.d("Z Value", Float.toString(z));
 
 			// car has been hit
-			commandArduino("http://192.168.100.108/hit");
-		}
+			commandArduino("http://192.168.100.107/hit");
+		}*/
 
 		// keep the last values for comparing them later
 		lastx = x;

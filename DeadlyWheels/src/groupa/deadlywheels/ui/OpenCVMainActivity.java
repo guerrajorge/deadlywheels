@@ -1,6 +1,10 @@
 package groupa.deadlywheels.ui;
 
 import groupa.deadlywheels.R;
+
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.LoaderCallbackInterface;
@@ -268,6 +272,17 @@ public class OpenCVMainActivity extends Activity implements CvCameraViewListener
 	    	String nombreColor = getColorName(color[0], color[1], color[2]);
 	    	Core.putText(mat, nombreColor, new Point(ancho, 50), 3, 1, new Scalar(255, 255, 255, 255), 2);
 	    	
+	    	
+	    	if(nombreColor == "nombre"){
+	    		commandArduino("http://192.168.100.107/winner");
+	    		commandArduino("http://192.168.100.107/looser");
+	    	}
+	    	
+	    	else if(nombreColor == "nombre") {
+	    		commandArduino("http://192.168.100.107/looser");
+	    		commandArduino("http://192.168.100.107/winner");
+	    	}
+	    	
 	    	//Rectangulo coloreado del color actual
 	    	//Core.rectangle(img, pt1, pt2, color, thickness);
 	    	// Si thickness < 0, hace un fill del rect�ngulo (Lo rellena)
@@ -275,9 +290,16 @@ public class OpenCVMainActivity extends Activity implements CvCameraViewListener
 	    	
 
 	        return mat;
-    	}
-        
+    	}   
     }
+    
+    public void commandArduino(String url) {
+		try {
+			HttpClient httpclient = new DefaultHttpClient();
+			httpclient.execute(new HttpGet(url));
+		} catch (Exception e) {
+		}
+	}
 
 
     public String getColorName(double r, double g, double b){

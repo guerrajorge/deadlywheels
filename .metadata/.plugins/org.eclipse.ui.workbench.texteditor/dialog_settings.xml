@@ -2,12 +2,14 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Core" key="selection"/>
+		<item value="menu" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="menu"/>
+			<item value="oncreate"/>
 			<item value="Core"/>
 			<item value="onCameraFrame"/>
 			<item value="getColorName"/>
