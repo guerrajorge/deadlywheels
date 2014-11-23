@@ -3,6 +3,10 @@ package groupa.deadlywheels.ui;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import groupa.deadlywheels.R;
 import groupa.deadlywheels.carserver.DatagramSocketServerGate;
 import groupa.deadlywheels.carserver.InternalCommandServerGate;
@@ -106,9 +110,23 @@ public class CarServerActivity extends Activity implements
 	 */
 	private boolean isThreadsInitialided = false;
 
+	/*
+	 * sensors variables
+	 */
 	private SensorManager mSensorManager;
-
 	private Sensor mAccelerometer;
+
+	/*
+	 * values for lastx, lasty and lastz to account for the different between
+	 * changes in the accelerometers
+	 */
+	public float lastx;
+	public float lasty;
+	public float lastz;
+
+	// keeps in check the number of times the car has been hit
+	public int number_of_hits;
+	Handler number_hits_handler = new Handler();
 
 	/** Called when the activity is first created. */
 	@Override
@@ -157,6 +175,14 @@ public class CarServerActivity extends Activity implements
 		// Initialize of the server of the car
 		this.setupServer();
 
+		// *************************************************
+		// Initialize the different in accelerometers values
+		lastx = 0;
+		lasty = 0;
+		lastz = 0;
+
+		// *************************************************
+		// Sensors methods and initialization
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		mAccelerometer = mSensorManager
 				.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -410,6 +436,8 @@ public class CarServerActivity extends Activity implements
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
+
+		// values for the coordinates
 		TextView xAxisValue = (TextView) findViewById(R.id.xAxisValue);
 		TextView yAxisValue = (TextView) findViewById(R.id.yAxisValue);
 		TextView zAxisValue = (TextView) findViewById(R.id.zAxisValue);
@@ -418,8 +446,54 @@ public class CarServerActivity extends Activity implements
 		float y = event.values[1];
 		float z = event.values[2];
 
-		xAxisValue.setText(Float.toString(x));
-		yAxisValue.setText(Float.toString(y));
-		zAxisValue.setText(Float.toString(z));
+		/*
+		 * Only care about z and y z = horizontal y = lateral
+		 */
+		if (Math.abs(lastx - x) > 3) {
+
+			// for debugging purposes
+			xAxisValue.setText(Float.toString(x));
+			Log.d("X Value", Float.toString(x));
+
+		}
+
+		if (Math.abs(lasty - y) > 3) {
+
+			// for debugging purposes
+			System.out.println("y :" + y);
+			yAxisValue.setText(Float.toString(y));
+			Log.d("Y Value", Float.toString(y));
+
+			// car has been hit
+			commandArduino("http://192.168.100.108/hit");
+
+		}
+
+		if (Math.abs(lastz - z) > 3) {
+
+			// for debugging purposes
+			System.out.println("z :" + z);
+			zAxisValue.setText(Float.toString(z));
+			Log.d("Z Value", Float.toString(z));
+
+			// car has been hit
+			commandArduino("http://192.168.100.108/hit");
+		}
+
+		// keep the last values for comparing them later
+		lastx = x;
+		lasty = y;
+		lastz = z;
+	}
+
+	/*
+	 * Sends commands to the Arduino
+	 */
+	public void commandArduino(String url) {
+		try {
+			HttpClient httpclient = new DefaultHttpClient();
+			httpclient.execute(new HttpGet(url));
+		} catch (Exception e) {
+		}
 	}
 }

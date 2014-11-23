@@ -1,5 +1,10 @@
 package groupa.deadlywheels.ui;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
 import groupa.deadlywheels.R;
 import groupa.deadlywheels.carcontrol.DatagramSocketClientGate;
 import groupa.deadlywheels.core.CarDroiDuinoCore;
@@ -12,6 +17,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -24,7 +30,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 @SuppressLint("ClickableViewAccessibility")
-public class CarControlActivity extends Activity {
+public class CarControlActivity extends Activity{
 
 	// Camera's IP address
 	private String serverIPAddress;
@@ -41,6 +47,7 @@ public class CarControlActivity extends Activity {
 
 	TextView xAxisValue;
 
+	
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -84,7 +91,6 @@ public class CarControlActivity extends Activity {
 		});
 
 		btnRe.setOnTouchListener(new View.OnTouchListener() {
-
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (game_started) {
@@ -95,7 +101,6 @@ public class CarControlActivity extends Activity {
 						commandArduino("http://192.168.100.108/?stop");
 				}
 				return true;
-
 			}
 		});
 
@@ -157,6 +162,8 @@ public class CarControlActivity extends Activity {
 		 */
 
 		start_counter();
+		
+		new AsyncCaller().execute();
 
 	}
 
@@ -276,7 +283,6 @@ public class CarControlActivity extends Activity {
 					Integer.parseInt(this.clientServerPort));
 
 			this.surfaceView.startImageDrawer(this.systemCore);
-
 		} catch (Exception e) {
 			new AlertDialog.Builder(this).setMessage(e.getMessage()).show();
 		}
@@ -314,4 +320,43 @@ public class CarControlActivity extends Activity {
 				R.raw.glass);
 		mPlayer.start();
 	}
+	
+	private class AsyncCaller extends AsyncTask<Void, Void, Void>
+	{
+
+	    @Override
+	    protected void onPreExecute() {
+	        super.onPreExecute();
+	    }
+	    @SuppressWarnings("resource")
+		@Override
+	    protected Void doInBackground(Void... params) {
+	    	ServerSocket serversocket;
+			try {
+				serversocket = new ServerSocket(5555);
+				Socket socket = serversocket.accept();
+				BufferedReader in = new BufferedReader (new InputStreamReader(socket.getInputStream()));
+				String incomingMessage = in.readLine()+ System.getProperty("line.separator");
+				in.close();
+				socket.close();
+				
+				xAxisValue.setText(incomingMessage);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+
+	        return null;
+	    }
+
+	    @Override
+	    protected void onPostExecute(Void result) {
+	        super.onPostExecute(result);
+
+	    }
+
+	    }
 }
