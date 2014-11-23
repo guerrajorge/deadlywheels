@@ -6,20 +6,20 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="handler" key="selection"/>
+		<item value="mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.color_blob_detection_activity_surface_view);&#x0A;&#x09;&#x09;mOpenCvCameraView.setCvCameraViewListener(this);" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="Handler"/>
+			<item value="mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.color_blob_detection_activity_surface_view);&#x0A;&#x09;&#x09;mOpenCvCameraView.setCvCameraViewListener(this);"/>
 			<item value="oncreate"/>
+			<item value="getColorName"/>
+			<item value="ColorBlobDetector"/>
+			<item value="mDetector"/>
+			<item value="Handler"/>
 			<item value="commandArduino"/>
 			<item value="command"/>
-			<item value="onCreate"/>
-			<item value="setupClient"/>
-			<item value="ImageBut"/>
-			<item value="imageBut"/>
 		</list>
 		<list key="replacehistory">
 			<item value="192.168.100.108"/>

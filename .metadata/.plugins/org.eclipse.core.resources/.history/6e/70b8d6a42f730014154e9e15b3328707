@@ -46,6 +46,12 @@
         </activity>
         
         <activity
+            android:name=".ui.finishline"
+            android:configChanges="orientation"
+            android:screenOrientation="landscape" >
+        </activity>
+        
+        <activity
             android:name=".ui.CarControlActivity"
             android:configChanges="orientation"
             android:screenOrientation="landscape" >

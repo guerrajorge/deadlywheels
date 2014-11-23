@@ -22,7 +22,7 @@ import android.view.WindowManager;
     public void gotofinishline(View view){
         // Do something in response to the touched image
         //Intent intent = new Intent(this, finishline.class);
-        //startActivity(intent);
+        startActivity(intent);
     }
 
     @Override
