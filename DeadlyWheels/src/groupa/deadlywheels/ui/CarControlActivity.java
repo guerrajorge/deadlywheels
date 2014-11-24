@@ -1,6 +1,10 @@
 package groupa.deadlywheels.ui;
 
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
 import groupa.deadlywheels.R;
 import groupa.deadlywheels.carcontrol.DatagramSocketClientGate;
 import groupa.deadlywheels.core.CarDroiDuinoCore;
@@ -13,6 +17,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -41,8 +46,6 @@ public class CarControlActivity extends Activity{
 	public Boolean game_started;
 
 	TextView xAxisValue;
-	
-	TextView servertextview;
 
 	
 	@SuppressLint("NewApi")
@@ -65,7 +68,7 @@ public class CarControlActivity extends Activity{
 				SystemProperties.KEY_IP_ADDRESS);
 		this.clientServerPort = getIntent().getExtras().getString(
 				SystemProperties.KEY_PORT_NUMBER);
-	
+
 		ImageButton btnFrente = (ImageButton) findViewById(R.id.btnFrente);
 		ImageButton btnRe = (ImageButton) findViewById(R.id.btnRe);
 		ImageButton btnLeft = (ImageButton) findViewById(R.id.btnLeft);
@@ -77,10 +80,10 @@ public class CarControlActivity extends Activity{
 			public boolean onTouch(View v, MotionEvent event) {
 				if (game_started) {
 					if (event.getAction() == MotionEvent.ACTION_DOWN)
-						commandArduino("http://192.168.100.108/?forward");
+						commandArduino("http://192.168.100.107/?forward");
 
 					else if (event.getAction() == MotionEvent.ACTION_UP)
-						commandArduino("http://192.168.100.108/?stop");
+						commandArduino("http://192.168.100.107/?stop");
 				}
 				return true;
 
@@ -92,10 +95,10 @@ public class CarControlActivity extends Activity{
 			public boolean onTouch(View v, MotionEvent event) {
 				if (game_started) {
 					if (event.getAction() == MotionEvent.ACTION_DOWN)
-						commandArduino("http://192.168.100.108/?reverse");
+						commandArduino("http://192.168.100.107/?reverse");
 
 					else if (event.getAction() == MotionEvent.ACTION_UP)
-						commandArduino("http://192.168.100.108/?stop");
+						commandArduino("http://192.168.100.107/?stop");
 				}
 				return true;
 			}
@@ -106,10 +109,10 @@ public class CarControlActivity extends Activity{
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.108/?left");
+					commandArduino("http://192.168.100.107/?left");
 
 				else if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.108/?servo");
+					commandArduino("http://192.168.100.107/?servo");
 
 				return true;
 
@@ -121,13 +124,24 @@ public class CarControlActivity extends Activity{
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN)
-					commandArduino("http://192.168.100.108/?right");
+					commandArduino("http://192.168.100.107/?right");
 
 				else if (event.getAction() == MotionEvent.ACTION_UP)
-					commandArduino("http://192.168.100.108/?servo");
+					commandArduino("http://192.168.100.107/?servo");
 
 				return true;
 
+			}
+		});
+
+		ImageButton btnLanterna = (ImageButton) findViewById(R.id.btnFarol);
+
+		btnLanterna.setOnTouchListener(new View.OnTouchListener() {
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN)
+					ligarDesligarLanterna();
+
+				return false;
 			}
 		});
 
@@ -148,6 +162,8 @@ public class CarControlActivity extends Activity{
 		 */
 
 		start_counter();
+		
+		new AsyncCaller().execute();
 
 	}
 
@@ -265,7 +281,7 @@ public class CarControlActivity extends Activity{
 			this.socketClientGate = new DatagramSocketClientGate(
 					this.systemCore, this.serverIPAddress,
 					Integer.parseInt(this.clientServerPort));
-			
+
 			this.surfaceView.startImageDrawer(this.systemCore);
 		} catch (Exception e) {
 			new AlertDialog.Builder(this).setMessage(e.getMessage()).show();
@@ -304,4 +320,43 @@ public class CarControlActivity extends Activity{
 				R.raw.glass);
 		mPlayer.start();
 	}
+	
+	private class AsyncCaller extends AsyncTask<Void, Void, Void>
+	{
+
+	    @Override
+	    protected void onPreExecute() {
+	        super.onPreExecute();
+	    }
+	    @SuppressWarnings("resource")
+		@Override
+	    protected Void doInBackground(Void... params) {
+	    	ServerSocket serversocket;
+			try {
+				serversocket = new ServerSocket(5555);
+				Socket socket = serversocket.accept();
+				BufferedReader in = new BufferedReader (new InputStreamReader(socket.getInputStream()));
+				String incomingMessage = in.readLine()+ System.getProperty("line.separator");
+				in.close();
+				socket.close();
+				
+				xAxisValue.setText(incomingMessage);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+
+	        return null;
+	    }
+
+	    @Override
+	    protected void onPostExecute(Void result) {
+	        super.onPostExecute(result);
+
+	    }
+
+	    }
 }

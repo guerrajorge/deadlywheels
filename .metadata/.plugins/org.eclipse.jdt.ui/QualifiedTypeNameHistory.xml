@@ -1,17 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="es.ijos.daltonicapp.R.id"/>
-<fullyQualifiedTypeName name="groupa.deadlywheels.carcontrol.DatagramSocketArduinoWorker"/>
-<fullyQualifiedTypeName name="java.net.NetworkInterface"/>
-<fullyQualifiedTypeName name="java.util.Enumeration"/>
-<fullyQualifiedTypeName name="java.net.InetAddress"/>
-<fullyQualifiedTypeName name="org.apache.http.conn.util.InetAddressUtils"/>
-<fullyQualifiedTypeName name="android.os.Handler"/>
-<fullyQualifiedTypeName name="java.net.ServerSocket"/>
-<fullyQualifiedTypeName name="android.widget.TextView"/>
-<fullyQualifiedTypeName name="java.net.Socket"/>
-<fullyQualifiedTypeName name="java.io.BufferedReader"/>
-<fullyQualifiedTypeName name="java.io.InputStreamReader"/>
-<fullyQualifiedTypeName name="java.io.OutputStream"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
 </qualifiedTypeNameHistroy>

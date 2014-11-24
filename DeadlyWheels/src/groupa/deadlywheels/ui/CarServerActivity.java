@@ -1,11 +1,5 @@
 package groupa.deadlywheels.ui;
 
-import groupa.deadlywheels.R;
-import groupa.deadlywheels.carserver.DatagramSocketServerGate;
-import groupa.deadlywheels.carserver.InternalCommandServerGate;
-import groupa.deadlywheels.core.CarDroiDuinoCore;
-import groupa.deadlywheels.utils.SystemProperties;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -13,6 +7,11 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import groupa.deadlywheels.R;
+import groupa.deadlywheels.carserver.DatagramSocketServerGate;
+import groupa.deadlywheels.carserver.InternalCommandServerGate;
+import groupa.deadlywheels.core.CarDroiDuinoCore;
+import groupa.deadlywheels.utils.SystemProperties;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,13 +27,13 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 
 public class CarServerActivity extends Activity implements
 		SurfaceHolder.Callback, SensorEventListener {
@@ -106,26 +105,22 @@ public class CarServerActivity extends Activity implements
 	private SensorManager mSensorManager;
 	private Sensor mAccelerometer;
 
-	public static float Threshold = (float) 6;
-	public static float YThreshold = (float) 4;
-
-	public int Threshold_flag = 0;
-	public int YThreshold_flag = 0;
-
-	public int counter = 2;
-	public int ycounter = 2;
+	/*
+	 * values for lastx, lasty and lastz to account for the different between
+	 * changes in the accelerometers
+	 */
+	public float lastx;
+	public float lasty;
+	public float lastz;
 
 	// keeps in check the number of times the car has been hit
 	public int number_of_hits;
 	Handler number_hits_handler = new Handler();
 
 	/** Called when the activity is first created. */
-	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-				.permitAll().build();
-		StrictMode.setThreadPolicy(policy);
+
 		// *************************************************
 		// Performs first the method inherited class (Upper class -
 		// Extends )
@@ -168,6 +163,12 @@ public class CarServerActivity extends Activity implements
 		// *************************************************
 		// Initialize of the server of the car
 		this.setupServer();
+
+		// *************************************************
+		// Initialize the different in accelerometers values
+		lastx = 0;
+		lasty = 0;
+		lastz = 0;
 
 		// *************************************************
 		// Sensors methods and initialization
@@ -422,7 +423,6 @@ public class CarServerActivity extends Activity implements
 
 	}
 
-	// Detecting any shake gesture
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 
@@ -430,52 +430,49 @@ public class CarServerActivity extends Activity implements
 		TextView xAxisValue = (TextView) findViewById(R.id.xAxisValue);
 		TextView yAxisValue = (TextView) findViewById(R.id.yAxisValue);
 		TextView zAxisValue = (TextView) findViewById(R.id.zAxisValue);
-		TextView speedValue = (TextView) findViewById(R.id.hitval);
 
 		float x = event.values[0];
 		float y = event.values[1];
 		float z = event.values[2];
 
-		if (z > Threshold && Threshold_flag <= 0) {
+		/*
+		 * Only care about z and y z = horizontal y = lateral
+		 */
+		if (Math.abs(lastx - x) > 3) {
+
+			// for debugging purposes
+			xAxisValue.setText(Float.toString(x));
+			Log.d("X Value", Float.toString(x));
+
+		}
+
+		if (y > 3) 
+
+			// for debugging purposes
+			System.out.println("y :" + y);
+			yAxisValue.setText(Float.toString(y));
+			Log.d("Y Value", Float.toString(y));
+
 			// car has been hit
-			speedValue.setText("Hit!");
 			commandArduino("http://192.168.100.107/hit");
-			Threshold_flag = 30;
 
-			counter = 2;
-		}
+		
 
-		if (counter < 0) {
-			speedValue.setText("");
-			counter = 100;
-		}
+		/*if (Math.abs(lastz - z) > 3) {
 
-		if (y > YThreshold && YThreshold_flag <= 0) {
+			// for debugging purposes
+			System.out.println("z :" + z);
+			zAxisValue.setText(Float.toString(z));
+			Log.d("Z Value", Float.toString(z));
+
 			// car has been hit
-			speedValue.setText("Hit!");
 			commandArduino("http://192.168.100.107/hit");
-			Threshold_flag = 30;
+		}*/
 
-			ycounter = 2;
-		}
-
-		Threshold_flag--;
-		counter--;
-
-		if (ycounter < 0) {
-			speedValue.setText("");
-			counter = 100;
-		}
-
-		YThreshold_flag--;
-		ycounter--;
-
-		String Thresholdflag = Integer.toString(Threshold_flag);
-		Log.d("Threshold_flag", Thresholdflag);
-
-		xAxisValue.setText(Float.toString(x));
-		yAxisValue.setText(Float.toString(y));
-		zAxisValue.setText(Float.toString(z));
+		// keep the last values for comparing them later
+		lastx = x;
+		lasty = y;
+		lastz = z;
 	}
 
 	/*

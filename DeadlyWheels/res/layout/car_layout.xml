@@ -47,12 +47,12 @@
         android:textSize="15sp" />
     
     <TextView
-        android:id="@+id/hitval"
+        android:id="@+id/acelAxisValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/hitlabel"
+        android:layout_alignBottom="@+id/acel_axis"
         android:layout_marginLeft="56dp"
-        android:layout_toRightOf="@+id/hitlabel"
+        android:layout_toRightOf="@+id/acel_axis"
         android:text="@string/empty"
         android:textSize="15sp" />
 
@@ -114,12 +114,12 @@
         android:textSize="15sp" />
     
     <TextView
-        android:id="@+id/hitlabel"
+        android:id="@+id/acel_axis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/z_axis"
         android:layout_toRightOf="@+id/textView1"
-        android:text="@string/hitlabel"
+        android:text="@string/acel_axis"
         android:textColor="#FFAA66CC"
         android:textSize="15sp" />
 </RelativeLayout>
