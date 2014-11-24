@@ -53,6 +53,11 @@ public class DatagramSocketClientGate {
 	private Thread datagramSocketClientReceiverThread;
 
 	/**
+	 * Thread that will trigger the Worker Receiving
+	 */
+	private Thread datagramSocketArduinoThread;
+
+	/**
 	 * Worker responsible for sending the Data Control to Cart Server through
 	 * the core
 	 */
@@ -99,6 +104,7 @@ public class DatagramSocketClientGate {
 		// Receive frames Video
 		this.datagramSocketClientReceiverWorker = new DatagramSocketClientReceiverWorker(
 				this.systemCore, this.clientServerPort);
+
 		// *************************************************
 		// Object creates the worker thread that sent the data Control the Car
 		this.datagramSocketClientSenderWorker = new DatagramSocketClientSenderWorker(
@@ -165,6 +171,19 @@ public class DatagramSocketClientGate {
 		while (retry) {
 			try {
 				this.datagramSocketClientSenderThread.join();
+				retry = false;
+			} catch (InterruptedException e) {
+			}
+		}
+
+		// **************************************************
+		// Reusing Flag-- This wrong ... but to do what ?
+		retry = true;
+		// **************************************************
+		// Try to kill the Thread shipping in bullet !!!!
+		while (retry) {
+			try {
+				this.datagramSocketArduinoThread.join();
 				retry = false;
 			} catch (InterruptedException e) {
 			}

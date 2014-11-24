@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:keepScreenOn="true"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <ImageButton
+            android:id="@+id/btnFrente"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:contentDescription="@string/btnFrente"
+            android:src="@drawable/up_arrow" />
+
+        <ImageButton
+            android:id="@+id/btnRe"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:contentDescription="@string/btnRe"
+            android:src="@drawable/down_arrow" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+
+        <groupa.deadlywheels.ui.FrameView
+            android:id="@+id/surfaceControl"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:scrollbars="vertical" />
+
+        <ImageView
+            android:id="@+id/crackview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/crack"
+            android:scaleType="fitXY"
+            android:src="@raw/crack"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/numberone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/one"
+            android:scaleType="fitXY"
+            android:src="@raw/one"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/numbertwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/two"
+            android:scaleType="fitXY"
+            android:src="@raw/two"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/numberthree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/three"
+            android:scaleType="fitXY"
+            android:src="@raw/three"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/numbergo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/go"
+            android:scaleType="fitXY"
+            android:src="@raw/go"
+            android:visibility="gone" />
+
+            <requestFocus />
+        </TextView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight=".2"  >
+    
+        <ImageButton
+            android:id="@+id/btnLeft"
+            android:layout_width="60dp"
+            android:layout_height="0dp"
+            android:layout_weight=".1"
+            android:clickable="false"
+            android:contentDescription="@string/btnMarchaAumenta"
+            android:src="@drawable/left_arrow" />
+
+        <ImageButton
+            android:id="@+id/btnRight"
+            android:layout_width="60dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:contentDescription="@string/btnMarchaReduz"
+            android:src="@drawable/right_arrow" />
+    </LinearLayout>
+
+</LinearLayout>

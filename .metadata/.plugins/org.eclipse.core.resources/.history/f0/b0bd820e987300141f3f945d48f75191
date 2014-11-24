@@ -1,0 +1,11 @@
+package groupa.deadlywheels.carcontrol;
+
+public class SocketServerReceiver implements Runnable{
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,144 @@
+package groupa.deadlywheels.carcontrol;
+
+
+import groupa.deadlywheels.core.CarDroiDuinoCore;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.DatagramSocket;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
+
+import android.os.Handler;
+import android.util.Log;
+
+public class DatagramSocketArduinoWorker implements Runnable{
+
+	/**
+	 * Core System - Prov Queues for Data Exchange between System Threads
+	 */
+	private CarDroiDuinoCore systemCore;
+
+	/**
+	 * Socket for connection via UPD with Server and receipt of Frames
+	 */
+	private DatagramSocket datagramSocket;
+	/**
+	 * Looping Control of Thread
+	 */
+	private boolean isOn = false;
+	
+	static String SERVER_IP;
+	static final int SERVER_PORT = 5000;
+	
+	Handler handler = new Handler();
+	ServerSocket serverSocket;
+	
+	public DatagramSocketArduinoWorker(CarDroiDuinoCore systemCore,
+			int clientPort) throws SocketException {
+
+	}
+
+	@Override
+	public void run() {
+		try {
+			if (SERVER_IP != null) {
+				handler.post(new Runnable() {
+					@Override
+					public void run() {
+						textView1.setText(textView1.getText()
+								+ "Server listening on IP: " + SERVER_IP
+								+ "\n");
+					}
+				});
+
+				//---create an instance of the server socket---
+				serverSocket = new ServerSocket(SERVER_PORT);
+
+				while (true) {
+					//---wait for incoming clients---
+					Socket client = serverSocket.accept();
+
+					//---the above code is a blocking call;
+					// i.e. it will block until a client connects---
+
+					//---client has connected---
+					handler.post(new Runnable() {
+						@Override
+						public void run() {
+							textView1.setText(textView1.getText()
+									+ "Connected to client." + "\n");
+						}
+					});
+
+					try {
+						//---get an InputStream object to read from the
+						// socket---
+						BufferedReader br = new BufferedReader(
+								new InputStreamReader(
+										client.getInputStream()));
+
+						OutputStream outputStream = 
+								client.getOutputStream();
+
+						//---read all incoming data terminated with a \n
+						// char---
+						String line = null;
+						while ((line = br.readLine()) != null) {
+							final String strReceived = line;
+
+							//---send whatever you received back to the
+							// client---
+							String s = line + "\n";
+							outputStream.write(s.getBytes());
+							
+							handler.post(new Runnable() {
+								@Override
+								public void run() {
+									textView1.setText(textView1.getText()
+											+ strReceived + "\n");
+								}
+							});
+						}
+
+						//---client has disconnected from the server---
+						handler.post(new Runnable() {
+							@Override
+							public void run() {
+								textView1.setText(textView1.getText()
+										+ "Client disconnected." + "\n");
+							}
+						});
+						
+					} catch (Exception e) {
+						final String error = e.getLocalizedMessage();
+						handler.post(new Runnable() {
+							@Override
+							public void run() {
+								textView1.setText(textView1.getText()
+										+ error);
+							}
+						});							
+					}
+				}
+			} else {
+				handler.post(new Runnable() {
+					@Override
+					public void run() {
+						System.out.println("error" + error);
+					}
+				});
+			}
+		} catch (Exception e) {
+			final String error = e.getLocalizedMessage();
+			handler.post(new Runnable() {
+				@Override
+				public void run() {
+					System.out.println("error" + error);
+				}
+			});
+		}
+	}
+
+}

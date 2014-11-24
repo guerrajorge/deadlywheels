@@ -1,0 +1,5 @@
+package groupa.deadlywheels.carcontrol;
+
+public class SocketServerReceiver {
+
+}
